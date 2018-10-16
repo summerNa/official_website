@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/login.css">
+  <title>登录</title>
+</head>
+
+<body>
+  <div class="header_wrap">
+    <div class="header">
+      <a href="home.html" class="left">
+        <img src="img/common/logo.png" alt="">
+      </a>
+      <ul class="middle">
+        <li>
+          <a href="home.html">首页</a>
+        </li>
+        <li>
+          <a href="product.html">产品</a>
+        </li>
+        <li>
+          <a href="introduce.html">关于我们</a>
+        </li>
+      </ul>
+      <div class="right">
+        <a class="click_im_area" href="javascript:;">
+          <div class="im_box">
+            <img src="img/common/yun.png" alt="">
+          </div>
+          <p class="in">导入</p>
+        </a>
+        <ul class="loginYet">
+          <li class="loginY">
+            <a class="usernameAndLogin" href="login.html">登录</a>
+          </li>
+          <li>
+            <div class="line"></div>
+          </li>
+          <li class="loginY">
+            <a class="logoutAndRegister" href="register.html">注册</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="con_wrap">
+    <div class="con">
+      <div class="top">登录会员</div>
+      <div class="detail">
+        <form action="">
+          <div class="input_box">
+            <!-- <div class="area">
+              <div class="select" id="selectbox1">
+                <p id="selectValue">+86</p>
+                <span class="jiao"></span>
+              </div>
+              <ul class="option hide" id="group">
+                <li><a href="javascript:;">+66</a></li>
+                <li><a href="javascript:;">+88</a></li>
+              </ul>
+            </div>
+            <input type="text" class="phone" placeholder="手机号" id="phoneInput"/>
+          </div> -->
+            <input type="text" class="pass" placeholder="手机号" id="phoneInput"/>
+          </div>
+          <div class="input_box">
+            <input type="password" placeholder="密码" class="pass" id="password">
+          </div>
+          <a href="javascript:;" class="input_box login" id="login">
+            登录
+          </a>
+          <div class="input_box forget">
+            <a href="forgetPass.html" class="for_pass">忘记密码</a>
+            <a href="register.html" class="for_reg">注册</a>
+          </div>
+          <p class="tips">*信息有误！</p>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="bottom_wrap">
+    <div class="bottom">沪ICP备18026697号/上海市公安局徐汇分局备案编号：1102323237987987</div>
+  </div>
+</body>
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/common.js"></script>
+<script>
+  $(document).ready(function () {
+    var regPhone = /^1[3|4|5|7|8|9]\d{9}$/;  // 手机号正则表达式
+    var phone;
+    var password;
+
+    var whdef = 100 / 1920; // 表示1920的设计图,使用100PX的默认值
+    var wH = window.innerHeight; // 当前窗口的高度
+    var wW = window.innerWidth; // 当前窗口的宽度
+    var rem = wW * whdef; // 以默认比例值乘以当前窗口宽度,得到该宽度下的相应FONT-SIZE值
+    $('html').css('font-size', rem + "px");
+
+    $(window).resize(function () {
+      wH = window.innerHeight;
+      wW = window.innerWidth;
+      rem = wW * whdef;
+      $('html').css('font-size', rem + "px");
+    });
+
+    // 模仿下拉框
+    $('#selectbox1').on('click', function () {
+      $('#group').removeClass('hide');
+    })
+
+    // 下拉选择
+    $('#group li a').on('click', function () {
+      $('#selectValue').html($(this).html());
+      $('#group').addClass('hide');
+    });
+
+    $("#phoneInput, #password").focus(function () {
+      $('.tips').removeClass('actived');
+    });
+
+    $("#phoneInput, #password").keyup(function () {
+      phone = $('#phoneInput').val();
+      password = $('#password').val();
+      if (phone && regPhone.test(phone) && password.length>=6 &&  password.length<= 20) {
+        $('.login').addClass('agLo');
+      } else {
+        $('.login').removeClass('agLo');
+      }
+    });
+
+    // 登录
+    $('#login').on('click', function () {
+      phone = $('#phoneInput').val();
+      password = $('#password').val();
+      if (phone && regPhone.test(phone) && password && (6 <= password.length <= 20)) {
+        params = encodeURI('{"password":"' + password + '","phone_number":"' + phone + '"}');
+        $.ajax({
+          url: 'http://t.api.vrbig.com/cli/live/Devicepassport/login?header={"os{"os":"web","reqtime":"1538122392411","sign":"","v"}&body=' + params,
+          type: 'GET',
+          dataType: 'JSON',
+          beforeSend: function (request) {
+          },
+          success: function (data) {
+            console.log('success')
+            if(data.header.retStatus !== 200) {
+              $('.tips').addClass('actived');
+              $('.tips').html(data.header.retMessage);
+            } else {
+              var session_cache = JSON.parse(JSON.stringify(data.body));
+              session_cache.phone = phone;
+              localStorage.setItem("vrbig", JSON.stringify(session_cache));
+              $(location).attr('href', 'home.html');  // 跳转到首页
+            }
+          },
+          error: function (error) {
+            console.log('error')
+          }
+        });
+      } else {
+        // $('.tips').addClass('actived');
+        // $('.tips').html('手机号或密码格式不对');
+      }
+    });
+
+  })
+
+</script>
+
+</html>

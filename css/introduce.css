@@ -1,0 +1,39 @@
+.banner_wrap {
+  width: 100%;
+  padding-top: 32%;
+  background-image: url(../img/introduce/banner.jpg);
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+.con_wrap {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.7rem;
+  margin-top: 1.35rem;
+}
+.con_wrap .con {
+  position: relative;
+  width: 13.2rem;
+  margin: 0 auto;
+}
+.con_wrap .con .title {
+  width: 100%;
+  font-size: 0.5rem;
+  color: #010101;
+  font-weight: 500;
+}
+.con_wrap .con .title span {
+  display: inline-block;
+  padding-bottom: 0.26rem;
+  border-bottom: 0.05rem solid #64b7fd;
+}
+.con_wrap .con .detail {
+  font-size: 0.3rem;
+  line-height: 0.55rem;
+  color: #010101;
+  margin-top: 0.67rem;
+}

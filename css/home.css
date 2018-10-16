@@ -1,0 +1,162 @@
+.list_wrap {
+  position: relative;
+  width: 100%;
+  display: flex;
+  margin-bottom: 0.3rem;
+}
+.list_wrap .list {
+  display: block;
+  position: relative;
+  width: 25%;
+  margin: 0px 1px;
+  overflow: hidden;
+}
+.list_wrap .clickArea {
+  display: block;
+  /* position: absolute;
+  left: 0rem;
+  top: 0rem;
+  width: 25%;
+  height: inherit; */
+}
+.list_wrap .list img {
+  width: 100%;
+}
+.list_wrap .list .info {
+  position: absolute;
+  width: 100%;
+  top: 0.4rem;
+  left: 0.68rem;
+}
+.list_wrap .list .info.info4 {
+  left: 0.49rem;
+}
+.list_wrap .list .info p {
+  font-size: 0.38rem;
+  color: #fff;
+  margin-bottom: 0.3rem;
+}
+.list_wrap .list .info div {
+  display: block;
+  width: 1.04rem;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  font-size: 0.2rem;
+  text-align: center;
+  color: #fff;
+}
+.list_wrap .list .info div.button1 {
+  background: #0969b5;
+}
+.list_wrap .list .info div.button2 {
+  background: #109299;
+}
+.list_wrap .list .info div.button3 {
+  background: #d62827;
+}
+.list_wrap .list .info div.button4 {
+  background: #d46617;
+}
+
+
+
+/* 设置轮播图样式 */
+/* 图片显示样式 */
+.banner_slider{
+	position: relative;
+	/* background-color: green; */
+	margin:0 auto;
+	width:100%;
+	height: 8.13rem;
+	overflow:hidden;
+}
+.banner_slider_pics{
+	width:500%;
+	height: 100%;
+	margin:0 auto;
+	position: relative;
+	left:-100%;
+}
+.banner_slider_pics .fff{
+  position: relative;
+	width: 20%;
+	height: 8.13rem;
+	display: block;
+	float: left;
+	text-align:center;
+}
+.banner_slider_pics .fff img{
+	width: 100%;
+	height: 8.13rem;
+}
+
+/* 圆点按钮 */
+.banner_slider_dots{
+	width: 100%;
+	line-height: 0.3rem;
+	position: absolute;
+	bottom: 0.36rem;
+	text-align: center;
+}
+.dots_item{
+	display: inline-block;
+	width:0.18rem;
+	height: 0.18rem;
+	background-color: #999;
+	border-radius:50%;
+	background: #fff;
+  opacity:0.5;
+	margin-right: 0.1rem;
+}
+.dots_active{
+	opacity: 1;
+}
+.info {
+  position: absolute;
+  z-index: 99;
+}
+.info.info1 {
+  top: 2.25rem;
+  left: 2.15rem;
+}
+.info.info2 {
+  top: 3rem;
+  left: 1.7rem;
+  border-left: 0.07rem solid #fff;
+  padding-left: 0.4rem;
+  box-sizing: border-box;
+}
+.info.info3 {
+  top: 3.2rem;
+  left: 4.5rem;
+}
+.info1 p {
+  font-size: 0.7rem;
+  color: #fff;
+  margin-bottom: 0.6rem;
+}
+.info1 a {
+  display: block;
+  width: 1.57rem;
+  height: 0.61rem;
+  font-size: 0.32rem;
+  line-height: 0.61rem;
+  text-align: center;
+  color: #fff;
+  border-radius: 0.1rem;
+  background: #65a4e9;
+}
+.info2 .t {
+  font-size: 0.7rem;
+  color: #fff;
+  margin-bottom: 0.2rem;
+}
+.info2 .d {
+  font-size: 0.25rem;
+  color: #fff;
+  text-align: left;
+}
+.info.info3 p{
+  font-size: 0.7rem;
+  color: #fff;
+}
