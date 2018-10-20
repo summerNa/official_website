@@ -3,6 +3,7 @@
   width: 100%;
   display: flex;
   margin-bottom: 0.3rem;
+  margin-top: 0.14rem;
 }
 .list_wrap .list {
   display: block;
@@ -13,11 +14,6 @@
 }
 .list_wrap .clickArea {
   display: block;
-  /* position: absolute;
-  left: 0rem;
-  top: 0rem;
-  width: 25%;
-  height: inherit; */
 }
 .list_wrap .list img {
   width: 100%;
@@ -25,23 +21,23 @@
 .list_wrap .list .info {
   position: absolute;
   width: 100%;
-  top: 0.4rem;
+  top: 0.6rem;
   left: 0.68rem;
 }
 .list_wrap .list .info.info4 {
   left: 0.49rem;
 }
 .list_wrap .list .info p {
-  font-size: 0.38rem;
+  font-size: 0.25rem;
   color: #fff;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.22rem;
 }
 .list_wrap .list .info div {
   display: block;
-  width: 1.04rem;
-  height: 0.4rem;
-  line-height: 0.4rem;
-  font-size: 0.2rem;
+  width: 0.74rem;
+  height: 0.28rem;
+  line-height: 0.28rem;
+  font-size: 0.14rem;
   text-align: center;
   color: #fff;
 }
@@ -67,7 +63,7 @@
 	/* background-color: green; */
 	margin:0 auto;
 	width:100%;
-	height: 8.13rem;
+	height: 6.12rem;
 	overflow:hidden;
 }
 .banner_slider_pics{
@@ -80,14 +76,14 @@
 .banner_slider_pics .fff{
   position: relative;
 	width: 20%;
-	height: 8.13rem;
+	height: 6.12rem;
 	display: block;
 	float: left;
 	text-align:center;
 }
 .banner_slider_pics .fff img{
 	width: 100%;
-	height: 8.13rem;
+	height: 6.12rem;
 }
 
 /* 圆点按钮 */
@@ -100,13 +96,12 @@
 }
 .dots_item{
 	display: inline-block;
-	width:0.18rem;
-	height: 0.18rem;
+	width:0.14rem;
+	height: 0.14rem;
 	background-color: #999;
 	border-radius:50%;
 	background: #fff;
   opacity:0.5;
-	margin-right: 0.1rem;
 }
 .dots_active{
 	opacity: 1;
@@ -120,43 +115,43 @@
   left: 2.15rem;
 }
 .info.info2 {
-  top: 3rem;
-  left: 1.7rem;
+  top: 2.3rem;
+  left: 3.8rem;
   border-left: 0.07rem solid #fff;
   padding-left: 0.4rem;
   box-sizing: border-box;
 }
 .info.info3 {
-  top: 3.2rem;
-  left: 4.5rem;
+  top: 2.2rem;
+  left: 4.8rem;
 }
 .info1 p {
-  font-size: 0.7rem;
+  font-size: 0.5rem;
   color: #fff;
   margin-bottom: 0.6rem;
 }
 .info1 a {
   display: block;
-  width: 1.57rem;
-  height: 0.61rem;
-  font-size: 0.32rem;
-  line-height: 0.61rem;
+  width: 1rem;
+  height: 0.34rem;
+  font-size: 0.2rem;
+  line-height: 0.34rem;
   text-align: center;
   color: #fff;
-  border-radius: 0.1rem;
+  border-radius: 4px;
   background: #65a4e9;
 }
 .info2 .t {
-  font-size: 0.7rem;
+  font-size: 0.5rem;
   color: #fff;
   margin-bottom: 0.2rem;
 }
 .info2 .d {
-  font-size: 0.25rem;
+  font-size: 0.2rem;
   color: #fff;
   text-align: left;
 }
 .info.info3 p{
-  font-size: 0.7rem;
+  font-size: 0.5rem;
   color: #fff;
 }

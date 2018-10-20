@@ -1,6 +1,6 @@
 .banner_wrap {
   width: 100%;
-  height: 7.18rem;
+  height: 6.05rem;
   background-image: url(../img/product/banner.jpg);
   -moz-background-size: cover;
   -webkit-background-size: cover;
@@ -37,7 +37,7 @@
 .product_wrap .product .con .left{
   width: 4.5rem;
   font-size: 0.3rem;
-  color: #656565;
+  color: #000;
   line-height: 0.6rem;
   padding-top: 1.6rem;
   box-sizing: border-box;
@@ -49,8 +49,8 @@
 }
 .middle_wrap {
   width: 100%;
-  height: 9.39rem;
-  background-image: url(../img/product/middle_ban.png);
+  height: 8.59rem;
+  background-image: url(../img/product/middle.jpg);
   -moz-background-size: cover;
   -webkit-background-size: cover;
   -o-background-size: cover;
@@ -138,7 +138,7 @@
   margin: 0.15rem 0rem;
 }
 .function_wrap .function ul li .con {
-  color: #656565;
+  color: #333;
   font-size: 0.2rem;
   line-height: 0.3rem;
   text-align: center;
@@ -149,12 +149,12 @@
   position: relative;
   width: 100%;
   margin-top: 1.75rem;
-  padding-bottom: 3.5rem;
+  padding-bottom: 1.75rem;
   box-sizing: border-box;
 }
 .download_wrap .down {
   position: relative;
-  width: 12.7rem;
+  width: 10.6rem;
   margin: 0 auto;
 }
 .download_wrap .down .title {
@@ -163,15 +163,15 @@
   font-weight: 400;
   color: #000;
   text-align: center;
-  margin-bottom: 1.7rem;
+  margin-bottom: 1.4rem;
 }
 .download_wrap .down .down_con {
   display: flex;
   justify-content: space-between;
 }
 .download_wrap .down .down_con .code {
-  width: 4.75rem;
-  height: 5.1rem;
+  width: 3.9rem;
+  height: 4.2rem;
   border: 1px solid #e7e7e7;
   border-top: none;
   text-align: center;
@@ -180,18 +180,19 @@
   border-bottom-right-radius: 6px;
 }
 .download_wrap .down .down_con .code img {
-  width: 3.58rem;
-  height: 3.58rem;
+  width: 2.5rem;
+  height: 2.5rem;
   margin-top: 0.8rem;
 }
 .download_wrap .down .down_con .top {
-  width: 4.75rem;
-  height: 0.82rem;
-  font-size: 0.35rem;
+  width: 3.9rem;
+  height: 0.7rem;
+  font-size: 0.28rem;
   color: #fff;
   text-align: center;
-  line-height: 0.82rem;
+  line-height: 0.7rem;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   background: #65a4e9;
+  border: 1px solid #65a4e9;
 }

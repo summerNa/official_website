@@ -1,7 +1,7 @@
 .banner_wrap {
   width: 100%;
-  height: 6.22rem;
-  background-image: url(../img/latest_news/banner.png);
+  height: 6rem;
+  background-image: url(../img/latest_news/banner.jpg);
   -moz-background-size: cover;
   -webkit-background-size: cover;
   -o-background-size: cover;
@@ -30,7 +30,7 @@
   /* margin-left: 0.5rem; */
 }
 .news_wrap .news li {
-  border-bottom: 1px solid #656565;
+  border-bottom: 1px solid #000;
   margin-bottom: 0.77rem;
   padding-bottom: 0.75rem;
   box-sizing: border-box;
@@ -61,7 +61,7 @@
 }
 .news_wrap .news .list .info .time p {
   font-size: 0.2rem;
-  color: #656565;
+  color: #000;
   margin-right: 0.4rem;
 }
 .news_wrap .news .list .info .time img.eye {
