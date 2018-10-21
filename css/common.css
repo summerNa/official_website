@@ -113,6 +113,9 @@ div, p{
   display: flex;
   align-items: center;
 }
+.footer_wrap .footer li a {
+  color: #525252;
+}
 .footer_wrap .footer ul.contact .QQ span {
   margin-right: 0.34rem;
 }

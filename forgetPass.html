@@ -76,9 +76,9 @@
           <div class="input_box">
             <input type="password" placeholder="6-20位密码，字母、数字、符号都可以" class="pass" id="password" autocomplete="off">
           </div>
-          <div class="input_box yes">
+          <!-- <div class="input_box yes">
             <input type="checkbox" id="isAgree"/>我已阅读并接受<span>用户协议</span>
-          </div>
+          </div> -->
           <a href="javascript:;" class="input_box register" id="register">
             提交
           </a>
@@ -136,8 +136,8 @@
       phone = $('#phoneInput').val();
       password = $('#password').val();
       verify_code = $('#code').val();
-      checked = $('#isAgree').is(':checked');
-      if (phone && regPhone.test(phone) && password.length >=6 && password.length <= 20 && verify_code.length === 6 && checked) {
+      // checked = $('#isAgree').is(':checked');
+      if (phone && regPhone.test(phone) && password.length >=6 && password.length <= 20 && verify_code.length === 6) {
         $('#register').addClass('actived');
       } else {
         $('#register').removeClass('actived');
@@ -165,7 +165,7 @@
         if (flag) {
           flag = false;
           $.ajax({
-            url: 'http://t.api.vrbig.com/cli/live/Devicepassport/getVerifyCode?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+            url: 'http://api.xiaoyu.chat/live/Devicepassport/getVerifyCode?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
             type: 'GET',
             dataType: 'JSON',
             beforeSend: function (request) {
@@ -208,11 +208,11 @@
       phone = $('#phoneInput').val();
       password = $('#password').val();
       verify_code = $('#code').val();
-      checked = $('#isAgree').is(':checked');
-      if (phone && regPhone.test(phone) && password && (6 <= password.length <= 20) && verify_code.length > 0 && checked) {
+      // checked = $('#isAgree').is(':checked');
+      if (phone && regPhone.test(phone) && password && (6 <= password.length <= 20) && verify_code.length > 0) {
         params = encodeURI('{"new_password":"' + password + '","phone_number":"' + phone + '","verify_code":"' + verify_code + '"}');
         $.ajax({
-          url: 'http://t.api.vrbig.com/cli/live/Devicepassport/forgetPassword?header={"os{"os":"web","reqtime":"1538122392411","sign":"","v"}&body=' + params,
+          url: 'http://api.xiaoyu.chat/live/Devicepassport/forgetPassword?header={"os{"os":"web","reqtime":"1538122392411","sign":"","v"}&body=' + params,
           type: 'GET',
           dataType: 'JSON',
           beforeSend: function (request) {

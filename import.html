@@ -187,7 +187,7 @@
 
     params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","client_type":1}');
     $.ajax({
-      url: 'http://t.api.vrbig.com/cli/live/devicemanager/getAuthPage?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+      url: 'http://api.xiaoyu.chat/live/devicemanager/getAuthPage?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
       type: 'GET',
       dataType: 'JSON',
       beforeSend: function (request) {
@@ -265,7 +265,7 @@
     // 获取用户名下分组
     // params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '"}');
     // $.ajax({
-    //   url: 'http://t.api.vrbig.com/cli/live/Devicemanager/getDeviceGroup?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+    //   url: 'http://api.xiaoyu.chat/live/Devicemanager/getDeviceGroup?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
     //   type: 'GET',
     //   dataType: 'JSON',
     //   beforeSend: function (request) {
@@ -286,7 +286,7 @@
       if ($('#groupInput').val()) {
         params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","group_name":"' + $('#groupInput').val() + '"}');
         $.ajax({
-          url: 'http://t.api.vrbig.com/cli/live/Devicemanager/AddDeviceGroup?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+          url: 'http://api.xiaoyu.chat/live/Devicemanager/AddDeviceGroup?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
           type: 'GET',
           dataType: 'JSON',
           beforeSend: function (request) {
