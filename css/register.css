@@ -312,6 +312,35 @@ input[type=checkbox]:checked::before {
 .hide {
   display: none;
 }
+.bg {
+  display: none;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100vw;
+  background-color:rgba(0,0,0,0.5);
+}
+.bg .drop {
+  position: relative;
+  width: 10.56rem;
+  height: 6rem;
+  top: 14%;
+  margin: 0 auto;
+  background: #fff;
+  padding: 0.3rem;
+  overflow-y: auto;
+}
+.bg p {
+  font-size: 0.2rem;
+  line-height: 0.3rem;
+}
+.bg .detail p {
+  line-height: 0.3rem;
+}
+.show {
+  display: block;
+}
 
 
 

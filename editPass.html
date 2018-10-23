@@ -102,7 +102,7 @@
       phone = $('#phoneInput').val();
       oldPassword = $('#oldPassword').val();
       newPassword = $('#newPassword').val();
-      if (phone && regPhone.test(phone) && oldPassword.length >= 6 && newPassword.length >= 6) {
+      if (phone && regPhone.test(phone) && oldPassword.length >= 8 && newPassword.length >= 8) {
         params = encodeURI('{"opt_type":"forget_pwd","phone_number":"' + phone + '"}');
         $.ajax({
           url: 'http://api.xiaoyu.chat/live/Devicepassport/updatePassword?header={"os{"os":"web","reqtime":"1538122392411","sign":"","v"}&body=' + params,

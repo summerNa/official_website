@@ -80,8 +80,30 @@ body {
     box-sizing: border-box;
     border-bottom: 1px solid #bad7f5;
 }
+.content_wrap .content .list .bar li.actived{
+    border-bottom: 1px solid #fff;
+}
 .content_wrap .content .list .bar.bar2 {
     margin-top: 0rem;
+    padding-left: 0.55rem;
+    padding-right: 0.55rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.content_wrap .content .list .bar.bar2 p{
+    font-size: 0.2rem;
+    color: #fff;
+}
+.content_wrap .content .list .bar.bar2 .addDevice {
+    width: 1.1rem;
+    height: 0.44rem;
+    border-radius: 4px;
+    border: 1px solid #fff;
+    color: #fff;
+    font-size: 0.2rem;
+    line-height: 0.44rem;
+    text-align: center;
 }
 .content_wrap .content .list .bar.bar3 {
     background: #fff;
@@ -90,11 +112,28 @@ body {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    height: 0.8rem;
+}
+.content_wrap .content .list .bar.bar3 .boxBtn {
+    width: 0.8rem;
+    height: 0.38rem;
+    border: 1px solid #65a4e9;
+    border-radius: 4px;
+    color: #65a4e9;
+    font-size: 0.18rem;
+    text-align: center;
+    line-height: 0.38rem;
+    margin-left: 0.1rem;
+    cursor: pointer;
 }
 .content_wrap .content .list .bar ul li {
     font-size: 0.2rem;
     color: #fff;
     padding: 0rem 0.55rem;
+    height: 100%;
+    line-height: 0.8rem;
+    border-bottom: 1px solid #bad7f5;
+    cursor: pointer;
 }
 .content_wrap .content .list .bar3 ul li {
     font-size: 0.2rem;
@@ -103,12 +142,12 @@ body {
 }
 .content_wrap .content .list .bar .search {
     position: relative;
-    background: #fff;
+    /* background: #fff; */
 }
 .content_wrap .content .list .bar .search li {
     padding: 0rem;
 }
-.content_wrap .content .list .bar .search span{
+.content_wrap .content .list .bar .search .label{
     display: inline-block;
     height: 0.48rem;
     width: 0.7rem;
@@ -120,15 +159,16 @@ body {
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
     border-right: 2px solid #fafafa;
+    border: none;
 }
-.content_wrap .content .list .bar .search input{
+.content_wrap .content .list .bar .search .in{
     display: inline-block;
     height: 0.48rem;
     width: 2.7rem;
     font-size: 0.2rem;
     color: #969696;
     line-height: 0.48rem;
-    text-align: center;
+    text-align: left;
     background: #fff;
     border: none;
     border-top-right-radius: 4px;

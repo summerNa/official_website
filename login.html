@@ -127,7 +127,7 @@
     $("#phoneInput, #password").keyup(function () {
       phone = $('#phoneInput').val();
       password = $('#password').val();
-      if (phone && regPhone.test(phone) && password.length>=6 &&  password.length<= 20) {
+      if (phone && regPhone.test(phone) && password.length>=8 &&  password.length<= 20) {
         $('.login').addClass('agLo');
       } else {
         $('.login').removeClass('agLo');
@@ -141,7 +141,7 @@
       if (phone && regPhone.test(phone) && password && (6 <= password.length <= 20)) {
         params = encodeURI('{"password":"' + password + '","phone_number":"' + phone + '"}');
         $.ajax({
-          url: '/http://api.xiaoyu.chat/live/Devicepassport/login?header={"os{"os":"web","reqtime":"1538122392411","sign":"","v"}&body=' + params,
+          url: '/api/cli/live/Devicepassport/login?header={"os{"os":"web","reqtime":"1538122392411","sign":"","v"}&body=' + params,
           type: 'GET',
           dataType: 'JSON',
           beforeSend: function (request) {

@@ -60,19 +60,19 @@
           <p class="title">设备状态</p>
           <ul>
             <li>
-              <p class="num">46</p>
+              <p class="num" id="allDevice">0</p>
               <p class="xs_title">玩客设备</p>
             </li>
             <li>
-              <p class="num">46</p>
+              <p class="num" id="normalDevice">0</p>
               <p class="xs_title">正常状态</p>
             </li>
             <li>
-              <p class="num unusual">46</p>
+              <p class="num unusual" id="unusualDevice">0</p>
               <p class="xs_title">状态异常</p>
             </li>
             <li>
-              <p class="num off">46</p>
+              <p class="num off" id="offlineDevice">0</p>
               <p class="xs_title">设备离线</p>
             </li>
           </ul>
@@ -81,12 +81,12 @@
           <p class="title">账户情况</p>
           <ul>
             <li>
-              <p class="num">444.44</p>
+              <p class="num" id="balance">0</p>
               <p class="xs_title">可提</p>
             </li>
             <li>
-              <p class="num">10104.44</p>
-              <p class="xs_title">可提</p>
+              <p class="num" id="extracted">0</p>
+              <p class="xs_title">已提</p>
             </li>
           </ul>
         </div>
@@ -95,16 +95,16 @@
         <p class="title">产量统计</p>
         <div class="con">
           <div>
-            <p class="xs_title">昨日产量：<span class="num">2.57</span></p>
-            <p class="xs_title">昨日最低：<span class="num">2456.57</span></p>
+            <p class="xs_title">昨日产量：<span class="num" id="outYesterday">0</span></p>
+            <p class="xs_title">昨日最低：<span class="num" id="minOutYesterday">0</span></p>
           </div>
           <div>
-            <p class="xs_title">昨日产量：<span class="num">2.57</span></p>
-            <p class="xs_title">昨日最低：<span class="num">2456.57</span></p>
+            <p class="xs_title">昨日平均：<span class="num" id="avgOutYesterday">0</span></p>
+            <p class="xs_title">本月产量：<span class="num" id="outMonthly">0</span></p>
           </div>
           <div>
-            <p class="xs_title">昨日产量：<span class="num">2.57</span></p>
-            <p class="xs_title">昨日最低：<span class="num">2456.57</span></p>
+            <p class="xs_title">昨日最高：<span class="num" id="maxOutYesterday">0</span></p>
+            <p class="xs_title">总产量：<span class="num" id="outTotal">0</span></p>
           </div>
         </div>
 
@@ -112,21 +112,24 @@
       <div class="list">
         <p class="title">矿机列表</p>
         <div class="bar">
-          <ul>
-            <li>全部</li>
+          <ul id="classify">
+            <li class="actived">全部</li>
             <li>正常</li>
             <li>异常</li>
             <li>离线</li>
           </ul>
           <ul class="search">
-            <li>
-              <span>分组</span>
-              <input type="text">
+            <li class="inputArea">
+              <div>
+                <input class="label" disabled value="分组" type="text">
+                <input class="in" type="text">
+              </div>
             </li>
           </ul>
         </div>
         <div class="bar bar2">
-
+          <p><span id="barAll">0</span>台，昨日产 <span id="barYest">0</span>，平均 <span id="barAvg">0</span>，可提 <span id="barAgree">0</span></p>
+          <div class="addDevice">添加设备</div>
         </div>
         <div class="bar bar3">
           <ul>
@@ -136,10 +139,10 @@
             <li>可提</li>
           </ul>
           <ul class="search">
-            <li>
+            <li class="boxBtn">
               提币
             </li>
-            <li>
+            <li class="boxBtn">
               刷新
             </li>
           </ul>
@@ -221,6 +224,63 @@
       wW = window.innerWidth;
       rem = wW * whdef;
       $('html').css('font-size', rem + "px");
+    });
+
+    params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '"}');
+    $.ajax({
+      url: '/api/cli/live/Devicesumary/getTheDeviceSumary?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+      type: 'GET',
+      dataType: 'JSON',
+      beforeSend: function (request) {
+      },
+      success: function (data) {
+        if (data.header.retStatus !== 200) {
+        } else {
+          $('#allDevice').text(data.body.sumary_data.state_sumary.deviceNum);
+          $('#normalDevice').text(data.body.sumary_data.state_sumary.onlineNum);
+          $('#unusualDevice').text(data.body.sumary_data.state_sumary.exceptionNum);
+          $('#offlineDevice').text(data.body.sumary_data.state_sumary.offlineNum);
+
+          $('#balance').text(data.body.sumary_data.withdraw_sumary.balance);
+          $('#extracted').text(data.body.sumary_data.withdraw_sumary.extracted);
+
+          $('#outYesterday').text(data.body.sumary_data.output_statistics.outputYesterday);
+          $('#minOutYesterday').text(data.body.sumary_data.output_statistics.minOutputYesterday);
+          $('#avgOutYesterday').text(data.body.sumary_data.output_statistics.avgOutputYesterday);
+          $('#outMonthly').text(data.body.sumary_data.output_statistics.outputMonthly);
+          $('#maxOutYesterday').text(data.body.sumary_data.output_statistics.outputMonthly);
+          $('#outTotal').text(data.body.sumary_data.output_statistics.outputTotal);
+
+        }
+      },
+      error: function (error) {
+        console.log('error');
+      }
+    });
+    
+    params2 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":1}');
+    $.ajax({
+      url: '/api/cli/live/Devicemanager/getDeviceList?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params2,
+      type: 'GET',
+      dataType: 'JSON',
+      beforeSend: function (request) {
+      },
+      success: function (data) {
+        if (data.header.retStatus !== 200) {
+        } else {
+          $('#barAll').text(data.body.device_info.sumary_data.device_count);
+          $('#barYest').text(data.body.device_info.sumary_data.avg_output);
+          $('#barAvg').text(data.body.device_info.sumary_data.balance);
+          $('#barAgree').text(data.body.device_info.sumary_data.yes_wkb);
+        }
+      },
+      error: function (error) {
+        console.log('error');
+      }
+    });
+
+    $('#classify li').on('click', function () {
+      $(this).addClass('actived').siblings().removeClass('actived');
     });
 
   })

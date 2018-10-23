@@ -131,7 +131,7 @@
       phone = $('#phoneInput').val();
       password = $('#password').val();
       checked = $('#isAgree').is(':checked');
-      if (phone && regPhone.test(phone) && password.length >=6 && password.length <=20 && checked) {
+      if (phone && regPhone.test(phone) && password.length >=8 && password.length <=20 && checked) {
         $('#register').addClass('actived');
       } else {
         $('#register').removeClass('actived');

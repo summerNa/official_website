@@ -137,7 +137,7 @@
       password = $('#password').val();
       verify_code = $('#code').val();
       // checked = $('#isAgree').is(':checked');
-      if (phone && regPhone.test(phone) && password.length >=6 && password.length <= 20 && verify_code.length === 6) {
+      if (phone && regPhone.test(phone) && password.length >=8 && password.length <= 20 && verify_code.length === 6) {
         $('#register').addClass('actived');
       } else {
         $('#register').removeClass('actived');
@@ -165,7 +165,7 @@
         if (flag) {
           flag = false;
           $.ajax({
-            url: 'http://api.xiaoyu.chat/live/Devicepassport/getVerifyCode?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+            url: '/api/cli/live/Devicepassport/getVerifyCode?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
             type: 'GET',
             dataType: 'JSON',
             beforeSend: function (request) {
@@ -212,7 +212,7 @@
       if (phone && regPhone.test(phone) && password && (6 <= password.length <= 20) && verify_code.length > 0) {
         params = encodeURI('{"new_password":"' + password + '","phone_number":"' + phone + '","verify_code":"' + verify_code + '"}');
         $.ajax({
-          url: 'http://api.xiaoyu.chat/live/Devicepassport/forgetPassword?header={"os{"os":"web","reqtime":"1538122392411","sign":"","v"}&body=' + params,
+          url: '/api/cli/live/Devicepassport/forgetPassword?header={"os{"os":"web","reqtime":"1538122392411","sign":"","v"}&body=' + params,
           type: 'GET',
           dataType: 'JSON',
           beforeSend: function (request) {
@@ -221,6 +221,8 @@
             if(data.header.retStatus !== 200) {
               $('.tips').addClass('actived');
               $('.tips').html(data.header.retMessage);
+            }else {
+              $(location).attr('href', 'login.html');
             }
           },
           error: function (error) {
