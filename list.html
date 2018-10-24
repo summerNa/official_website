@@ -118,14 +118,20 @@
             <li>异常</li>
             <li>离线</li>
           </ul>
-          <ul class="search">
-            <li class="inputArea">
-              <div>
-                <input class="label" disabled value="分组" type="text">
-                <input class="in" type="text">
+          <div class="right">
+            <div class="input_box">
+              <div class="select" id="selectbox1">
+                <p id="selectValue">分组</p>
+                <span class="jiao"></span>
               </div>
-            </li>
-          </ul>
+              <div class="option hide" id="group">
+                <p>小组1</p>
+                <p>小组2</p>
+              </div>
+              <input type="text" class="inputArea" placeholder="搜索">
+              <p class="sousuo"></p>
+            </div>
+          </div>
         </div>
         <div class="bar bar2">
           <p><span id="barAll">0</span>台，昨日产 <span id="barYest">0</span>，平均 <span id="barAvg">0</span>，可提 <span id="barAgree">0</span></p>
@@ -257,7 +263,7 @@
         console.log('error');
       }
     });
-    
+
     params2 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":1}');
     $.ajax({
       url: '/api/cli/live/Devicemanager/getDeviceList?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params2,
