@@ -307,16 +307,34 @@
           if (data.header.retStatus !== 200) {
           } else {
             $('#barAll').text(data.body.device_info.sumary_data.device_count);
-            $('#barYest').text(data.body.device_info.sumary_data.avg_output);
-            $('#barAvg').text(data.body.device_info.sumary_data.balance);
-            $('#barAgree').text(data.body.device_info.sumary_data.yes_wkb);
+            $('#barYest').text(data.body.device_info.sumary_data.avg_output.toFixed(2));
+            $('#barAvg').text(data.body.device_info.sumary_data.balance.toFixed(2));
+            $('#barAgree').text(data.body.device_info.sumary_data.yes_wkb.toFixed(2));
             var content = '';
             if (data.body.device_info.hasOwnProperty('device_list')) {
               for (var i = 0; i < data.body.device_info.device_list.length; i++) {
+                yes_wkb = Number(data.body.device_info.device_list[i].yes_wkb).toFixed(2);
+                before_day = Number(data.body.device_info.device_list[i].before_day).toFixed(2);
+                balance = Number(data.body.device_info.device_list[i].balance).toFixed(2);
+                if(data.body.device_info.device_list[i].status === 'offline') {
+                  sta = '离线';
+                } else if (data.body.device_info.device_list[i].status === 'online') {
+                  sta = '正常';
+                } else {
+                  sta = '异常';
+                }
+                if (!data.body.device_info.device_list[i].disk_info.length) {
+                  used = 0;
+                  all = 0;
+                } else {
+                  used = (Number(data.body.device_info.device_list[i].disk_info[0].used)/1024/1024/1024).toFixed();
+                  all = (Number(data.body.device_info.device_list[i].disk_info[0].capacity)/1024/1024/1024).toFixed();
+                }
+                day = ((Number(Date.parse(new Date())/1000)-Number(data.body.device_info.device_list[i].bind_time))/60/60/24).toFixed();
                 content += '<div class="pick"><div class="up"><p class="name">' + data.body.device_info.device_list[i].device_name
-                  + '<span class="status">正常</span></p><div class="money"><p class="left">昨天：<span>' + data.body.device_info.device_list[i].device_name + '</span>前天：<span>33.34</span>余额：<span>234.56</span></p><div class="right"><div><img src="img/common/search.png">统计</div><div><img src="img/common/search.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
-                  + '</span></p><p>0.14GB/1862.98GB</p></div><div class="line"><p>账号:<span>' + data.body.device_info.device_list[i].wky_account + '</span></p><p>激活天数:<span>' + data.body.device_info.device_list[i].activate_days +
-                  '天</span></p></div><div class="line"><p>IP:<span>' + data.body.device_info.device_list[i].ip + '</span></p></div></div></div>';
+                  + '<span class="status">'+sta+'</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>'+before_day+'</span>余额：<span>'+balance+'</span></p><div class="right"><div><img src="img/common/search.png">统计</div><div><img src="img/common/search.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
+                  + '</span></p><p>'+used+'/'+all+'</p></div><div class="line"><p>账号:<span>' + data.body.device_info.device_list[i].wky_account + '</span></p><p>激活天数:<span>' + day +
+                  '</span></p></div><div class="line"><p>IP:<span>' + data.body.device_info.device_list[i].ip + '</span></p></div></div></div>';
               }
               $('.listCon').empty();
               $('.listCon').append(content);
@@ -343,8 +361,9 @@
         },
         success: function (data) {
           if (data.header.retStatus !== 200) {
+            alert(data.header.retMessage);
           } else {
-            alert('提币成功！')
+            alert('提币成功！');
           }
         },
         error: function (error) {

@@ -286,3 +286,9 @@ body {
     font-size: 0.2rem;
     margin-left: 0.1rem;
 }
+.red {
+    color: red;
+}
+.grey {
+    color: #ccc;
+}
