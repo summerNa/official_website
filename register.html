@@ -478,7 +478,7 @@
     $('#sendCode').on('click', function () {
       phone = $('#phoneInput').val();
       if (phone && regPhone.test(phone)) {
-        params = encodeURI('{"opt_type":"reg","phone_number":"' + phone + '"}');
+        params = encodeURI('{"opt_type":"reg","phone_number":"' + phone + '","type":"phone"}');
         if (flag) {
           flag = false;
           $.ajax({
