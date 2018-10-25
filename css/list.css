@@ -267,6 +267,10 @@ body {
 .content_wrap .content .list .info  ul li .pick .down {
     background: #f5f5f5;
     padding: 0.15rem 0.3rem 0.15rem 0.3rem;
+    display: none;
+}
+.content_wrap .content .list .info  ul li .pick .down.none {
+    /* display: none; */
 }
 .content_wrap .content .list .info  ul li .pick .down .line {
     color: #000000;

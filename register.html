@@ -482,7 +482,7 @@
         if (flag) {
           flag = false;
           $.ajax({
-            url: '/api/cli/live/Devicepassport/getVerifyCode?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+            url: '/api/live/Devicepassport/getVerifyCode?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
             type: 'GET',
             dataType: 'JSON',
             beforeSend: function (request) {
@@ -526,9 +526,9 @@
       verify_code = $('#code').val();
       checked = $('#isAgree').is(':checked');
       if (phone && regPhone.test(phone) && password && (6 <= password.length <= 20) && verify_code.length > 0 && checked) {
-        params = encodeURI('{"password":"' + password + '","phone_number":"' + phone + '","verify_code":"' + verify_code + '","invite_code":""}');
+        params = encodeURI('{"password":"' + password + '","phone_number":"' + phone + '","verify_code":"' + verify_code + '","invite_code":"","type":"phone"}');
         $.ajax({
-          url: '/api/cli/live/Devicepassport/register?header={"os{"os":"web","reqtime":"1538122392411","sign":"","v"}&body=' + params,
+          url: '/api/live/Devicepassport/register?header={"os{"os":"web","reqtime":"1538122392411","sign":"","v"}&body=' + params,
           type: 'GET',
           dataType: 'JSON',
           beforeSend: function (request) {

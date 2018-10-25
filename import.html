@@ -187,7 +187,7 @@
 
     params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","client_type":1}');
     $.ajax({
-      url: 'http://api.xiaoyu.chat/live/devicemanager/getAuthPage?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+      url: '/api/live/devicemanager/getAuthPage?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
       type: 'GET',
       dataType: 'JSON',
       beforeSend: function (request) {

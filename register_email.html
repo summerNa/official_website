@@ -158,7 +158,7 @@
       if (phone && regPhone.test(phone) && password && (6 <= password.length <= 20) &&  checked) {
         params = encodeURI('{"password":"' + password + '","phone_number":"' + phone + '","verify_code":"' + verify_code + '","invite_code":""}');
         $.ajax({
-          url: 'http://api.xiaoyu.chat/live/Devicepassport/register?header={"os{"os":"web","reqtime":"1538122392411","sign":"","v"}&body=' + params,
+          url: '/api/live/Devicepassport/register?header={"os{"os":"web","reqtime":"1538122392411","sign":"","v"}&body=' + params,
           type: 'GET',
           dataType: 'JSON',
           beforeSend: function (request) {

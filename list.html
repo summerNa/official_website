@@ -125,8 +125,8 @@
                 <span class="jiao"></span>
               </div>
               <div class="option hide" id="group">
-                <p>小组1</p>
-                <p>小组2</p>
+                <!-- <p>小组1</p>
+                <p>小组2</p> -->
               </div>
               <input type="text" class="inputArea" placeholder="搜索">
               <p class="sousuo"></p>
@@ -145,18 +145,18 @@
             <li>可提</li>
           </ul>
           <ul class="search">
-            <li class="boxBtn">
+            <li class="boxBtn" id="allCoin">
               提币
             </li>
-            <li class="boxBtn">
+            <li class="boxBtn" id="allStart">
               刷新
             </li>
           </ul>
         </div>
         <div class="info">
           <ul>
-            <li>
-              <div class="pick">
+            <li class="listCon">
+              <!-- <div class="pick">
                 <div class="up">
                   <p class="name">马赛克，客厅-01，南京移动 <span class="status">正常</span></p>
                   <div class="money">
@@ -180,32 +180,7 @@
                     <p>IP:<span>183.206.7.221</span></p>
                   </div>
                 </div>
-              </div>
-              <div class="pick">
-                <div class="up">
-                  <p class="name">马赛克，客厅-01，南京移动 <span class="status">正常</span></p>
-                  <div class="money">
-                    <p class="left">昨天：<span>23.34</span>前天：<span>33.34</span>余额：<span>234.56</span></p>
-                    <div class="right">
-                      <div><img src="img/common/search.png">统计</div>
-                      <div><img src="img/common/search.png">操作</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="down">
-                  <div class="line">
-                    <p>SN:<span>OCPZ1180322</span></p>
-                    <p>0.14GB/1862.98GB</p>
-                  </div>
-                  <div class="line">
-                    <p>账号:<span>1587874284664</span></p>
-                    <p>激活天数:<span>10天</span></p>
-                  </div>
-                  <div class="line">
-                    <p>IP:<span>183.206.7.221</span></p>
-                  </div>
-                </div>
-              </div>
+              </div> -->
             </li>
           </ul>
         </div>
@@ -232,9 +207,12 @@
       $('html').css('font-size', rem + "px");
     });
 
+    is_all = 1;
+    state = '';
+
     params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '"}');
     $.ajax({
-      url: '/api/cli/live/Devicesumary/getTheDeviceSumary?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+      url: '/api/live/Devicesumary/getTheDeviceSumary?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
       type: 'GET',
       dataType: 'JSON',
       beforeSend: function (request) {
@@ -247,16 +225,38 @@
           $('#unusualDevice').text(data.body.sumary_data.state_sumary.exceptionNum);
           $('#offlineDevice').text(data.body.sumary_data.state_sumary.offlineNum);
 
-          $('#balance').text(data.body.sumary_data.withdraw_sumary.balance);
-          $('#extracted').text(data.body.sumary_data.withdraw_sumary.extracted);
+          $('#balance').text(data.body.sumary_data.withdraw_sumary.balance.toFixed(2));
+          $('#extracted').text(data.body.sumary_data.withdraw_sumary.extracted.toFixed(2));
 
-          $('#outYesterday').text(data.body.sumary_data.output_statistics.outputYesterday);
-          $('#minOutYesterday').text(data.body.sumary_data.output_statistics.minOutputYesterday);
-          $('#avgOutYesterday').text(data.body.sumary_data.output_statistics.avgOutputYesterday);
-          $('#outMonthly').text(data.body.sumary_data.output_statistics.outputMonthly);
-          $('#maxOutYesterday').text(data.body.sumary_data.output_statistics.outputMonthly);
-          $('#outTotal').text(data.body.sumary_data.output_statistics.outputTotal);
+          $('#outYesterday').text(data.body.sumary_data.output_statistics.outputYesterday.toFixed(2));
+          $('#minOutYesterday').text(data.body.sumary_data.output_statistics.minOutputYesterday.toFixed(2));
+          $('#avgOutYesterday').text(data.body.sumary_data.output_statistics.avgOutputYesterday.toFixed(2));
+          $('#outMonthly').text(data.body.sumary_data.output_statistics.outputMonthly.toFixed(2));
+          $('#maxOutYesterday').text(data.body.sumary_data.output_statistics.outputMonthly.toFixed(2));
+          $('#outTotal').text(data.body.sumary_data.output_statistics.outputTotal.toFixed(2));
 
+        }
+      },
+      error: function (error) {
+        console.log('error');
+      }
+    });
+
+    // 获取用户名下的分组
+    $.ajax({
+      url: '/api/live/Devicemanager/getDeviceGroup?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+      type: 'GET',
+      dataType: 'JSON',
+      beforeSend: function (request) {
+      },
+      success: function (data) {
+        if (data.header.retStatus !== 200) {
+        } else {
+          var groups = '';
+          for (var i = 0; i < data.body.group_list.length; i++) {
+            groups += '<p class="gr" id="' + data.body.group_list[i].group_id + '">' + data.body.group_list[i].group_name + '</p>'
+          }
+          $('#group').append(groups);
         }
       },
       error: function (error) {
@@ -265,30 +265,130 @@
     });
 
     params2 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":1}');
-    $.ajax({
-      url: '/api/cli/live/Devicemanager/getDeviceList?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params2,
-      type: 'GET',
-      dataType: 'JSON',
-      beforeSend: function (request) {
-      },
-      success: function (data) {
-        if (data.header.retStatus !== 200) {
-        } else {
-          $('#barAll').text(data.body.device_info.sumary_data.device_count);
-          $('#barYest').text(data.body.device_info.sumary_data.avg_output);
-          $('#barAvg').text(data.body.device_info.sumary_data.balance);
-          $('#barAgree').text(data.body.device_info.sumary_data.yes_wkb);
-        }
-      },
-      error: function (error) {
-        console.log('error');
-      }
-    });
+    getList();
 
     $('#classify li').on('click', function () {
+      is_all = 0;
       $(this).addClass('actived').siblings().removeClass('actived');
+      if ($(this).text() === '正常') {
+        state = 'online';
+      } else if ($(this).text() === '异常') {
+        state = 'exception';
+      } else if ($(this).text() === '离线') {
+        state = 'offline';
+      } else {
+        is_all = 1;
+      }
+      params2 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":"' + is_all + '","state":"' + state + '"}');
+      getList();
     });
 
+    $("#group").on('click', '.gr', function () {
+      $("#group").addClass('hide');
+      group_id = $(this).attr('id');
+      console.log(666)
+      params2 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":"' + is_all + '","state":"' + state + '","group_id":"' + group_id + '"}');
+      getList();
+    });
+
+    // $(".sousuo").on('click', function() {
+    //   params2 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":"' + is_all + '","state":"' + state + '","group_id":"' + group_id + '","key_word": "'+ $('.inputArea').val() +'"}');
+    //   getList();
+    // });
+
+    function getList() {
+      $.ajax({
+        url: '/api/live/Devicemanager/getDeviceList?header={"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params2,
+        type: 'GET',
+        dataType: 'JSON',
+        beforeSend: function (request) {
+        },
+        success: function (data) {
+          if (data.header.retStatus !== 200) {
+          } else {
+            $('#barAll').text(data.body.device_info.sumary_data.device_count);
+            $('#barYest').text(data.body.device_info.sumary_data.avg_output);
+            $('#barAvg').text(data.body.device_info.sumary_data.balance);
+            $('#barAgree').text(data.body.device_info.sumary_data.yes_wkb);
+            var content = '';
+            if (data.body.device_info.hasOwnProperty('device_list')) {
+              for (var i = 0; i < data.body.device_info.device_list.length; i++) {
+                content += '<div class="pick"><div class="up"><p class="name">' + data.body.device_info.device_list[i].device_name
+                  + '<span class="status">正常</span></p><div class="money"><p class="left">昨天：<span>' + data.body.device_info.device_list[i].device_name + '</span>前天：<span>33.34</span>余额：<span>234.56</span></p><div class="right"><div><img src="img/common/search.png">统计</div><div><img src="img/common/search.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
+                  + '</span></p><p>0.14GB/1862.98GB</p></div><div class="line"><p>账号:<span>' + data.body.device_info.device_list[i].wky_account + '</span></p><p>激活天数:<span>' + data.body.device_info.device_list[i].activate_days +
+                  '天</span></p></div><div class="line"><p>IP:<span>' + data.body.device_info.device_list[i].ip + '</span></p></div></div></div>';
+              }
+              $('.listCon').empty();
+              $('.listCon').append(content);
+            } else {
+              $('.listCon').empty();
+            }
+
+          }
+        },
+        error: function (error) {
+          console.log('error');
+        }
+      });
+    }
+
+    // 提币
+    $("#allCoin").on('click', function () {
+      params4 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":1}');
+      $.ajax({
+        url: '/api/live/Devicemanager/drawCoin?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params4,
+        type: 'GET',
+        dataType: 'JSON',
+        beforeSend: function (request) {
+        },
+        success: function (data) {
+          if (data.header.retStatus !== 200) {
+          } else {
+            alert('提币成功！')
+          }
+        },
+        error: function (error) {
+          console.log('error');
+        }
+      });
+    });
+
+    // 刷新
+    $("#allStart").on('click', function () {
+      params4 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '}');
+      $.ajax({
+        url: '/api/live/Devicemanager/refreshDevice?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params4,
+        type: 'GET',
+        dataType: 'JSON',
+        beforeSend: function (request) {
+        },
+        success: function (data) {
+          if (data.header.retStatus !== 200) {
+          } else {
+            alert('刷新成功！')
+          }
+        },
+        error: function (error) {
+          console.log('error');
+        }
+      });
+    });
+
+     // dropDown
+     $(".listCon").on('click', '.up', function () {
+      $(this).next(".down").toggle();
+      $(this).parent().siblings().children('.down').hide();
+    });
+
+    $("#selectbox1").on('click', function () {
+      $("#group").removeClass('hide');
+    });
+
+    
+    // 添加设备
+    $('.addDevice').on('click', function() {
+      window.location.href = 'import.html';
+    });
   })
 
 </script>
