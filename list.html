@@ -430,12 +430,12 @@
         $(this).attr('dir', 'down');
         $(this).siblings().children('.arrow').attr('src', '');
         $(this).children('.arrow').attr('src', 'img/common/up.jpg');
-        arrList.sort(compare3('group_name'));
+        arrList.sort(compare4('group_name'));
       } else {
         $(this).attr('dir', 'up');
         $(this).siblings().children('.arrow').attr('src', '');
         $(this).children('.arrow').attr('src', 'img/common/down2.jpg')
-        arrList.sort(compare4('group_name'));
+        arrList.sort(compare3('group_name'));
       }
       var content = '';
       for (var i = 0; i < arrList.length; i++) {
@@ -472,12 +472,12 @@
         $(this).attr('dir', 'down');
         $(this).siblings().children('.arrow').attr('src', '');
         $(this).children('.arrow').attr('src', 'img/common/up.jpg');
-        arrList.sort(compare3('device_name'));
+        arrList.sort(compare4('device_name'));
       } else {
         $(this).attr('dir', 'up');
         $(this).siblings().children('.arrow').attr('src', '');
         $(this).children('.arrow').attr('src', 'img/common/down2.jpg');
-        arrList.sort(compare4('device_name'));
+        arrList.sort(compare3('device_name'));
       }
       var content = '';
       for (var i = 0; i < arrList.length; i++) {
