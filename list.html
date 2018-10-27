@@ -29,16 +29,16 @@
           <a href="introduce.html">关于我们</a>
         </li>
         <li class="actived">
-          <a href="introduce.html">小宇矿机</a>
+          <a href="list.html">小宇矿机</a>
         </li>
       </ul>
       <div class="right">
-        <a class="click_im_area" href="javascript:;">
+        <!-- <a class="click_im_area" href="javascript:;">
           <div class="im_box">
             <img src="img/common/yun.png" alt="">
           </div>
           <p class="in">导入</p>
-        </a>
+        </a> -->
         <ul class="loginYet">
           <li class="loginY">
             <a class="usernameAndLogin" href="login.html">登录</a>
@@ -139,10 +139,10 @@
         </div>
         <div class="bar bar3">
           <ul>
-            <li>分组</li>
-            <li>名称</li>
-            <li>产量</li>
-            <li>可提</li>
+            <li class="fenzu" dir="up">分组<img class="arrow" src="" alt=""></li>
+            <li class="mingcheng" dir="up">名称<img class="arrow" src="" alt=""></li>
+            <li class="chanliang" dir="up">产量<img class="arrow" src="" alt=""></li>
+            <li class="keti" dir="up">可提<img class="arrow" src="" alt=""></li>
           </ul>
           <ul class="search">
             <li class="boxBtn" id="allCoin">
@@ -156,31 +156,6 @@
         <div class="info">
           <ul>
             <li class="listCon">
-              <!-- <div class="pick">
-                <div class="up">
-                  <p class="name">马赛克，客厅-01，南京移动 <span class="status">正常</span></p>
-                  <div class="money">
-                    <p class="left">昨天：<span>23.34</span>前天：<span>33.34</span>余额：<span>234.56</span></p>
-                    <div class="right">
-                      <div><img src="img/common/search.png">统计</div>
-                      <div><img src="img/common/search.png">操作</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="down">
-                  <div class="line">
-                    <p>SN:<span>OCPZ1180322</span></p>
-                    <p>0.14GB/1862.98GB</p>
-                  </div>
-                  <div class="line">
-                    <p>账号:<span>1587874284664</span></p>
-                    <p>激活天数:<span>10天</span></p>
-                  </div>
-                  <div class="line">
-                    <p>IP:<span>183.206.7.221</span></p>
-                  </div>
-                </div>
-              </div> -->
             </li>
           </ul>
         </div>
@@ -191,6 +166,7 @@
 </body>
 <script src="js/jquery-1.9.1.min.js"></script>
 <script src="js/common.js"></script>
+<script src="js/pinyin2.js"></script>
 <script>
   $(document).ready(function () {
 
@@ -209,6 +185,9 @@
 
     is_all = 1;
     state = '';
+    group_id = -1;
+
+    arrList = [];
 
     params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '"}');
     $.ajax({
@@ -234,7 +213,6 @@
           $('#outMonthly').text(data.body.sumary_data.output_statistics.outputMonthly.toFixed(2));
           $('#maxOutYesterday').text(data.body.sumary_data.output_statistics.outputMonthly.toFixed(2));
           $('#outTotal').text(data.body.sumary_data.output_statistics.outputTotal.toFixed(2));
-
         }
       },
       error: function (error) {
@@ -291,12 +269,14 @@
       getList();
     });
 
-    // $(".sousuo").on('click', function() {
-    //   params2 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":"' + is_all + '","state":"' + state + '","group_id":"' + group_id + '","key_word": "'+ $('.inputArea').val() +'"}');
-    //   getList();
-    // });
+    $(".sousuo").on('click', function () {
+      params2 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":"' + is_all + '","state":"' + state + '","group_id":"' + group_id + '","key_word": "' + $('.inputArea').val() + '"}');
+      $('.inputArea').val('');
+      getList();
+    });
 
     function getList() {
+      $('.arrow').attr('src', '');
       $.ajax({
         url: '/api/live/Devicemanager/getDeviceList?header={"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params2,
         type: 'GET',
@@ -312,11 +292,12 @@
             $('#barAgree').text(data.body.device_info.sumary_data.yes_wkb.toFixed(2));
             var content = '';
             if (data.body.device_info.hasOwnProperty('device_list')) {
+              arrList = data.body.device_info.device_list;
               for (var i = 0; i < data.body.device_info.device_list.length; i++) {
                 yes_wkb = Number(data.body.device_info.device_list[i].yes_wkb).toFixed(2);
                 before_day = Number(data.body.device_info.device_list[i].before_day).toFixed(2);
                 balance = Number(data.body.device_info.device_list[i].balance).toFixed(2);
-                if(data.body.device_info.device_list[i].status === 'offline') {
+                if (data.body.device_info.device_list[i].status === 'offline') {
                   sta = '离线';
                 } else if (data.body.device_info.device_list[i].status === 'online') {
                   sta = '正常';
@@ -327,13 +308,13 @@
                   used = 0;
                   all = 0;
                 } else {
-                  used = (Number(data.body.device_info.device_list[i].disk_info[0].used)/1024/1024/1024).toFixed();
-                  all = (Number(data.body.device_info.device_list[i].disk_info[0].capacity)/1024/1024/1024).toFixed();
+                  used = (Number(data.body.device_info.device_list[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed();
+                  all = (Number(data.body.device_info.device_list[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed();
                 }
-                day = ((Number(Date.parse(new Date())/1000)-Number(data.body.device_info.device_list[i].bind_time))/60/60/24).toFixed();
+                day = ((Number(Date.parse(new Date()) / 1000) - Number(data.body.device_info.device_list[i].bind_time)) / 60 / 60 / 24).toFixed();
                 content += '<div class="pick"><div class="up"><p class="name">' + data.body.device_info.device_list[i].device_name
-                  + '<span class="status">'+sta+'</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>'+before_day+'</span>余额：<span>'+balance+'</span></p><div class="right"><div><img src="img/common/search.png">统计</div><div><img src="img/common/search.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
-                  + '</span></p><p>'+used+'/'+all+'</p></div><div class="line"><p>账号:<span>' + data.body.device_info.device_list[i].wky_account + '</span></p><p>激活天数:<span>' + day +
+                  + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div><img src="img/common/tongji.png">统计</div><div><img src="img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
+                  + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>账号:<span>' + data.body.device_info.device_list[i].wky_account + '</span></p><p>激活天数:<span>' + day +
                   '</span></p></div><div class="line"><p>IP:<span>' + data.body.device_info.device_list[i].ip + '</span></p></div></div></div>';
               }
               $('.listCon').empty();
@@ -393,8 +374,228 @@
       });
     });
 
-     // dropDown
-     $(".listCon").on('click', '.up', function () {
+    // sort 下
+    function compare1(property) {
+      return function (a, b) {
+        var value1 = a[property];
+        var value2 = b[property];
+        return value1 - value2;
+      }
+    }
+    // sort 上
+    function compare2(property) {
+      return function (a, b) {
+        var value1 = a[property];
+        var value2 = b[property];
+        return value2 - value1;
+      }
+    }
+
+    //定义一个比较器 
+    function compare3(propertyName) {
+      return function (object1, object2) {
+        var value1 = object1[propertyName];
+        var value2 = object2[propertyName];
+        if (ConvertPinyin(value2) < ConvertPinyin(value1)) {
+          return -1;
+        }
+        else if (ConvertPinyin(value2) > ConvertPinyin(value1)) {
+          return 1;
+        }
+        else {
+          return 0;
+        }
+      }
+    }
+
+    //定义一个比较器 
+    function compare4(propertyName) {
+      return function (object1, object2) {
+        var value1 = object1[propertyName];
+        var value2 = object2[propertyName];
+        if (ConvertPinyin(value2) > ConvertPinyin(value1)) {
+          return -1;
+        }
+        else if (ConvertPinyin(value2) < ConvertPinyin(value1)) {
+          return 1;
+        }
+        else {
+          return 0;
+        }
+      }
+    }
+
+    $('.fenzu').on('click', function () {
+      if ($(this).attr('dir') === 'up') {
+        $(this).attr('dir', 'down');
+        $(this).siblings().children('.arrow').attr('src', '');
+        $(this).children('.arrow').attr('src', 'img/common/up.jpg');
+        arrList.sort(compare3('group_name'));
+      } else {
+        $(this).attr('dir', 'up');
+        $(this).siblings().children('.arrow').attr('src', '');
+        $(this).children('.arrow').attr('src', 'img/common/down2.jpg')
+        arrList.sort(compare4('group_name'));
+      }
+      var content = '';
+      for (var i = 0; i < arrList.length; i++) {
+        yes_wkb = Number(arrList[i].yes_wkb).toFixed(2);
+        before_day = Number(arrList[i].before_day).toFixed(2);
+        balance = Number(arrList[i].balance).toFixed(2);
+        if (arrList[i].status === 'offline') {
+          sta = '离线';
+        } else if (arrList[i].status === 'online') {
+          sta = '正常';
+        } else {
+          sta = '异常';
+        }
+        if (!arrList[i].disk_info.length) {
+          used = 0;
+          all = 0;
+        } else {
+          used = (Number(arrList[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed();
+          all = (Number(arrList[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed();
+        }
+        day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].bind_time)) / 60 / 60 / 24).toFixed();
+        content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
+          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div><img src="img/common/tongji.png">统计</div><div><img src="img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>'
+          + arrList[i].device_sn
+          + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>账号:<span>' + arrList[i].wky_account + '</span></p><p>激活天数:<span>' + day +
+          '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
+      }
+      $('.listCon').empty();
+      $('.listCon').append(content);
+    });
+
+    $('.mingcheng').on('click', function () {
+      if ($(this).attr('dir') === 'up') {
+        $(this).attr('dir', 'down');
+        $(this).siblings().children('.arrow').attr('src', '');
+        $(this).children('.arrow').attr('src', 'img/common/up.jpg');
+        arrList.sort(compare3('device_name'));
+      } else {
+        $(this).attr('dir', 'up');
+        $(this).siblings().children('.arrow').attr('src', '');
+        $(this).children('.arrow').attr('src', 'img/common/down2.jpg');
+        arrList.sort(compare4('device_name'));
+      }
+      var content = '';
+      for (var i = 0; i < arrList.length; i++) {
+        yes_wkb = Number(arrList[i].yes_wkb).toFixed(2);
+        before_day = Number(arrList[i].before_day).toFixed(2);
+        balance = Number(arrList[i].balance).toFixed(2);
+        if (arrList[i].status === 'offline') {
+          sta = '离线';
+        } else if (arrList[i].status === 'online') {
+          sta = '正常';
+        } else {
+          sta = '异常';
+        }
+        if (!arrList[i].disk_info.length) {
+          used = 0;
+          all = 0;
+        } else {
+          used = (Number(arrList[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed();
+          all = (Number(arrList[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed();
+        }
+        day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].bind_time)) / 60 / 60 / 24).toFixed();
+        content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
+          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div><img src="img/common/tongji.png">统计</div><div><img src="img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>'
+          + arrList[i].device_sn
+          + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>账号:<span>' + arrList[i].wky_account + '</span></p><p>激活天数:<span>' + day +
+          '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
+      }
+      $('.listCon').empty();
+      $('.listCon').append(content);
+    });
+
+
+    $('.keti').on('click', function () {
+      if ($(this).attr('dir') === 'up') {
+        $(this).attr('dir', 'down');
+        $(this).siblings().children('.arrow').attr('src', '');
+        $(this).children('.arrow').attr('src', 'img/common/up.jpg');
+        arrList.sort(compare2('balance'));
+      } else {
+        $(this).attr('dir', 'up');
+        $(this).siblings().children('.arrow').attr('src', '');
+        $(this).children('.arrow').attr('src', 'img/common/down2.jpg');
+        arrList.sort(compare1('balance'));
+      }
+      var content = '';
+      for (var i = 0; i < arrList.length; i++) {
+        yes_wkb = Number(arrList[i].yes_wkb).toFixed(2);
+        before_day = Number(arrList[i].before_day).toFixed(2);
+        balance = Number(arrList[i].balance).toFixed(2);
+        if (arrList[i].status === 'offline') {
+          sta = '离线';
+        } else if (arrList[i].status === 'online') {
+          sta = '正常';
+        } else {
+          sta = '异常';
+        }
+        if (!arrList[i].disk_info.length) {
+          used = 0;
+          all = 0;
+        } else {
+          used = (Number(arrList[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed();
+          all = (Number(arrList[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed();
+        }
+        day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].bind_time)) / 60 / 60 / 24).toFixed();
+        content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
+          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div><img src="img/common/tongji.png">统计</div><div><img src="img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>'
+          + arrList[i].device_sn
+          + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>账号:<span>' + arrList[i].wky_account + '</span></p><p>激活天数:<span>' + day +
+          '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
+      }
+      $('.listCon').empty();
+      $('.listCon').append(content);
+    });
+
+    $('.chanliang').on('click', function () {
+      if ($(this).attr('dir') === 'up') {
+        $(this).attr('dir', 'down');
+        $(this).siblings().children('.arrow').attr('src', '');
+        $(this).children('.arrow').attr('src', 'img/common/up.jpg');
+        arrList.sort(compare2('yes_wkb'));
+      } else {
+        $(this).attr('dir', 'up');
+        $(this).siblings().children('.arrow').attr('src', '');
+        $(this).children('.arrow').attr('src', 'img/common/down2.jpg');
+        arrList.sort(compare1('yes_wkb'));
+      }
+      var content = '';
+      for (var i = 0; i < arrList.length; i++) {
+        yes_wkb = Number(arrList[i].yes_wkb).toFixed(2);
+        before_day = Number(arrList[i].before_day).toFixed(2);
+        balance = Number(arrList[i].balance).toFixed(2);
+        if (arrList[i].status === 'offline') {
+          sta = '离线';
+        } else if (arrList[i].status === 'online') {
+          sta = '正常';
+        } else {
+          sta = '异常';
+        }
+        if (!arrList[i].disk_info.length) {
+          used = 0;
+          all = 0;
+        } else {
+          used = (Number(arrList[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed();
+          all = (Number(arrList[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed();
+        }
+        day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].bind_time)) / 60 / 60 / 24).toFixed();
+        content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
+          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div><img src="img/common/tongji.png">统计</div><div><img src="img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>'
+          + arrList[i].device_sn
+          + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>账号:<span>' + arrList[i].wky_account + '</span></p><p>激活天数:<span>' + day +
+          '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
+      }
+      $('.listCon').empty();
+      $('.listCon').append(content);
+    });
+
+    // dropDown
+    $(".listCon").on('click', '.up', function () {
       $(this).next(".down").toggle();
       $(this).parent().siblings().children('.down').hide();
     });
@@ -403,9 +604,9 @@
       $("#group").removeClass('hide');
     });
 
-    
+
     // 添加设备
-    $('.addDevice').on('click', function() {
+    $('.addDevice').on('click', function () {
       window.location.href = 'import.html';
     });
   })
