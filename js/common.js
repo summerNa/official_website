@@ -24,4 +24,12 @@ $('.click_im_area').on('click', function() {
   }
 });
 
+$('.header_wrap .header .list').on('click', function() {
+  if (isLoginS) {
+    $(location).attr('href', 'list.html');  // 跳转到首页
+  } else {
+    $(location).attr('href', 'login.html');  // 跳转到首页
+  }
+});
+
 

@@ -29,7 +29,7 @@
           <a href="introduce.html">关于我们</a>
         </li>
         <li class="">
-          <a href="list.html">小宇矿机</a>
+          <a class="list" href="javascript:;">小宇矿机</a>
         </li>
       </ul>
       <div class="right">
@@ -485,7 +485,7 @@
         if (flag) {
           flag = false;
           $.ajax({
-            url: '/api/live/Devicepassport/getVerifyCode?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+            url: 'http://api.xiaoyu.chat/live/Devicepassport/getVerifyCode?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
             type: 'GET',
             dataType: 'JSON',
             beforeSend: function (request) {
@@ -531,7 +531,7 @@
       if (phone && regPhone.test(phone) && password && (6 <= password.length <= 20) && verify_code.length > 0 && checked) {
         params = encodeURI('{"password":"' + password + '","phone_number":"' + phone + '","verify_code":"' + verify_code + '","invite_code":"","type":"mail"}');
         $.ajax({
-          url: '/api/live/Devicepassport/register?header={"os{"os":"web","reqtime":"1538122392411","sign":"","v"}&body=' + params,
+          url: 'http://api.xiaoyu.chat/live/Devicepassport/register?header={"os{"os":"web","reqtime":"1538122392411","sign":"","v"}&body=' + params,
           type: 'GET',
           dataType: 'JSON',
           beforeSend: function (request) {

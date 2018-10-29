@@ -28,7 +28,7 @@
           <a href="introduce.html">关于我们</a>
         </li>
         <li class="">
-          <a href="list.html">小宇矿机</a>
+          <a class="list" href="javascript:;">小宇矿机</a>
         </li>
       </ul>
       <div class="right">
@@ -190,7 +190,7 @@
 
     params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","client_type":1}');
     $.ajax({
-      url: '/api/live/devicemanager/getAuthPage?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+      url: 'http://api.xiaoyu.chat/live/devicemanager/getAuthPage?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
       type: 'GET',
       dataType: 'JSON',
       beforeSend: function (request) {

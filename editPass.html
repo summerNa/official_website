@@ -29,7 +29,7 @@
           <a href="introduce.html">关于我们</a>
         </li>
         <li class="">
-          <a href="list.html">小宇矿机</a>
+          <a class="list" href="javascript:;">小宇矿机</a>
         </li>
       </ul>
       <div class="right">
@@ -108,7 +108,7 @@
       if (phone && regPhone.test(phone) && oldPassword.length >= 8 && newPassword.length >= 8) {
         params = encodeURI('{"opt_type":"forget_pwd","phone_number":"' + phone + '"}');
         $.ajax({
-          url: '/api/live/Devicepassport/updatePassword?header={"os{"os":"web","reqtime":"1538122392411","sign":"","v"}&body=' + params,
+          url: 'http://api.xiaoyu.chat/live/Devicepassport/updatePassword?header={"os{"os":"web","reqtime":"1538122392411","sign":"","v"}&body=' + params,
           type: 'GET',
           dataType: 'JSON',
           beforeSend: function (request) {
