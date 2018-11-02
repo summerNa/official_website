@@ -1,3 +1,11 @@
+<?php
+// if(!isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) || strrpos(strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']), 'zh-cn') !== false) {
+//   include_once('lang/zh.php');
+// } else {
+//   include_once('lang/en.php');
+// }
+include_once('../lang/en.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +18,9 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/home.css">
-  <title>首页</title>
+  <title>
+    <?php echo $lang['首页']; ?>
+  </title>
 </head>
 
 <body>
@@ -21,16 +31,20 @@
       </a>
       <ul class="middle">
         <li class="actived">
-          <a href="home.html">首页</a>
+          <a class="home">
+            <?php echo $lang['首页']; ?></a>
         </li>
         <li>
-          <a href="product.html">产品</a>
+          <a href="product.html">
+            <?php echo $lang['产品']; ?></a>
         </li>
         <li>
-          <a href="introduce.html">关于我们</a>
+          <a href="introduce.html">
+            <?php echo $lang['关于我们']; ?></a>
         </li>
         <li class="">
-          <a class="list" href="javascript:;">小宇矿机</a>
+          <a class="list" href="javascript:;">
+            <?php echo $lang['小宇矿机']; ?></a>
         </li>
       </ul>
       <div class="right">
@@ -42,13 +56,15 @@
         </a> -->
         <ul class="loginYet">
           <li class="loginY">
-            <a class="usernameAndLogin" href="login.html">登录</a>
+            <a class="usernameAndLogin" href="login.html">
+              <?php echo $lang['登录']; ?></a>
           </li>
           <li>
             <div class="line"></div>
           </li>
           <li class="loginY">
-            <a class="logoutAndRegister" href="register.html">注册</a>
+            <a class="logoutAndRegister" href="register.html">
+              <?php echo $lang['注册']; ?></a>
           </li>
         </ul>
       </div>
@@ -59,34 +75,47 @@
       <div class="fff">
         <img src="img/home/banner3.jpg">
         <div class="info info3">
-          <p>稳定、安全、高效</p>
+          <p>
+            <?php echo $lang['稳定、安全、高效']; ?>
+          </p>
         </div>
       </div>
       <div class="fff">
         <img src="img/home/banner1.jpg">
         <div class="info info1">
-          <p>小宇监工-迅雷官方授权推荐玩客云监控工具</p>
+          <p>
+            <?php echo $lang['迅雷官方授权推荐玩客云监控工具']; ?>
+          </p>
           <!-- <a href="register.html">注册体验</a> -->
         </div>
       </div>
       <div class="fff">
         <img src="img/home/banner2.jpg">
         <div class="info info2">
-          <p class="t">致 力 于 行 业 领 跑 者</p>
-          <p class="d">我们不断创新的产品、真诚的服务，欢迎广大用户的到来</p>
+          <p class="t">
+            <?php echo $lang['致力于']; ?>
+          </p>
+          <p class="d">
+            <?php echo $lang['欢迎广大用户的到来']; ?>
+          </p>
         </div>
       </div>
       <div class="fff">
         <img src="img/home/banner3.jpg">
         <div class="info info3">
-          <p>稳定、安全、高效</p>
+          <p>
+            <?php echo $lang['稳定、安全、高效']; ?>
+          </p>
         </div>
       </div>
       <div class="fff">
         <img src="img/home/banner1.jpg">
         <div class="info info1">
-          <p>小宇监工迅雷官方唯一推荐</p>
-          <a href="register.html">注册体验</a>
+          <p>
+            <?php echo $lang['小宇监工迅雷官方唯一推荐']; ?>
+          </p>
+          <a href="register.html">
+            <?php echo $lang['注册体验']; ?></a>
         </div>
       </div>
     </div>
@@ -101,54 +130,81 @@
     <a href="active.html" class="list clickArea">
       <img src="img/home/one.jpg" alt="" />
       <div class="info">
-        <p>小宇活动</p>
-        <div class="button1">限时优惠</div>
+        <p>
+          <?php echo $lang['小宇活动']; ?>
+        </p>
+        <div class="button1">
+          <?php echo $lang['限时优惠']; ?>
+        </div>
       </div>
     </a>
 
     <a href="latest_news.html" class="list clickArea">
       <img src="img/home/two.jpg" alt="" />
       <div class="info">
-        <p>行业资讯</p>
-        <div class="button2">专业职业</div>
+        <p>
+          <?php echo $lang['行业资讯']; ?>
+        </p>
+        <div class="button2">
+          <?php echo $lang['专业职业']; ?>
+        </div>
       </div>
     </a>
 
     <a href="product.html" class="list clickArea">
       <img src="img/home/three.jpg" alt="">
       <div class="info">
-        <p>下载专区</p>
-        <div class="button3">急速下载</div>
+        <p>
+          <?php echo $lang['下载专区']; ?>
+        </p>
+        <div class="button3">
+          <?php echo $lang['急速下载']; ?>
+        </div>
       </div>
     </a>
     <a href="http://www.onethingcloud.cn/site/index.html" class="list clickArea">
       <img src="img/home/four.jpg" alt="">
       <div class="info info4">
-        <p>玩客云</p>
-        <div class="button4">准确稳定</div>
+        <p>
+          <?php echo $lang['玩客云']; ?>
+        </p>
+        <div class="button4">
+          <?php echo $lang['准确稳定']; ?>
+        </div>
       </div>
     </a>
   </div>
   <div class="footer_wrap">
     <div class="footer">
       <ul class="about">
-        <li class="title">关于宇监</li>
-        <li><a href="https://jq.qq.com/?_wv=1027&k=55yFqiF">合作机会</a></li>
-        <li><a href="https://jq.qq.com/?_wv=1027&k=55yFqiF">加入我们</a></li>
+        <li class="title">
+          <?php echo $lang['关于宇监']; ?>
+        </li>
+        <li><a href="https://jq.qq.com/?_wv=1027&k=55yFqiF">
+            <?php echo $lang['合作机会']; ?></a></li>
+        <li><a href="https://jq.qq.com/?_wv=1027&k=55yFqiF">
+            <?php echo $lang['加入我们']; ?></a></li>
       </ul>
       <ul class="contact">
-        <li class="title">联系宇监</li>
-        <li class="QQ"><span>QQ群</span> <a href="https://jq.qq.com/?_wv=1027&k=55yFqiF"><img src="img/common/contact.png"
+        <li class="title">
+          <?php echo $lang['联系宇监']; ?>
+        </li>
+        <li class="QQ"><span>
+            <?php echo $lang['QQ群']; ?></span> <a href="https://jq.qq.com/?_wv=1027&k=55yFqiF"><img src="img/common/contact.png"
               alt=""></a></li>
-        <li><span class="email">邮箱</span> <span>surpport@xiaoyu.chat</span></li>
+        <li><span class="email">
+            <?php echo $lang['邮箱']; ?></span> <span>
+            <?php echo $lang['邮箱2']; ?></span></li>
       </ul>
       <ul class="wechart">
-        <li class="title">微信公众号</li>
+        <li class="title">
+          <?php echo $lang['微信公众号']; ?>
+        </li>
         <li><img src="img/common/code.jpg" alt=""></li>
       </ul>
     </div>
     <div class="icp">
-      沪ICP备18026697号
+      <?php echo $lang['沪ICP备18026697号']; ?>
     </div>
   </div>
 
@@ -171,7 +227,6 @@
       $('html').css('font-size', rem + "px");
       pic_width = $('#banner_slider_pics .fff').eq(0).width();
     });
-
 
     var banner_slider = $('#banner_slider'),
       pics = $('#banner_slider_pics'),
@@ -216,7 +271,6 @@
       current = $(this).index();
       doSlider();
     });
-
 
 
   })

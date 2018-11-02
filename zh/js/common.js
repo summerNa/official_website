@@ -32,5 +32,14 @@ $('.header_wrap .header .list').on('click', function() {
   }
 });
 
+// var lang = 'en';
+
+// $('.home').on('click', function() {
+//   if (lang === 'en') {
+//     location.href = 'home_en.html';
+//   } else {
+//     location.href = 'home.html';
+//   }
+// });
 
 
