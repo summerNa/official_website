@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/active.css">
+  <title>公司活动</title>
+</head>
+
+<body>
+  <div class="header_wrap">
+    <div class="header">
+      <a href="home.html" class="left">
+        <img src="../img/common/logo.png" alt="">
+      </a>
+      <ul class="middle">
+        <li>
+          <a href="home.html">首页</a>
+        </li>
+        <li>
+          <a href="product.html">产品</a>
+        </li>
+        <li>
+          <a href="introduce.html">关于我们</a>
+        </li>
+        <li class="">
+          <a class="list" href="javascript:;">小宇矿机</a>
+        </li>
+      </ul>
+      <div class="right">
+        <!-- <a class="click_im_area" href="javascript:;">
+          <div class="im_box">
+            <img src="img/common/yun.png" alt="">
+          </div>
+          <p class="in">导入</p>
+        </a> -->
+        <ul class="loginYet">
+          <li class="language">
+            <a class="en" href="../en1/active.html">ENGLISH</a>
+          </li>
+          <li class="loginY">
+            <a class="usernameAndLogin" href="login.html">登录</a>
+          </li>
+          <li>
+            <div class="line"></div>
+          </li>
+          <li class="loginY">
+            <a class="logoutAndRegister" href="register.html">注册</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="banner_wrap">
+    <div class="con">
+      <p class="title">小宇上线啦！</p>
+      <p class="sm_title">唯一没有充值入口的监工APP</p>
+      <p class="xs_title">还不快快加入我们</p>
+      <a class="btn" href="register.html">加入我们</a>
+    </div>
+  </div>
+</body>
+<script src="../js/jquery-1.9.1.min.js"></script>
+<script src="../js/common.js"></script>
+<script>
+  $(document).ready(function () {
+
+    var whdef = 100 / 1920; // 表示1920的设计图,使用100PX的默认值
+    var wH = window.innerHeight; // 当前窗口的高度
+    var wW = window.innerWidth; // 当前窗口的宽度
+    var rem = wW * whdef; // 以默认比例值乘以当前窗口宽度,得到该宽度下的相应FONT-SIZE值
+    $('html').css('font-size', rem + "px");
+
+    $(window).resize(function () {
+      wH = window.innerHeight;
+      wW = window.innerWidth;
+      rem = wW * whdef;
+      $('html').css('font-size', rem + "px");
+    });
+
+  })
+
+</script>
+
+</html>

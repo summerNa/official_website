@@ -75,6 +75,13 @@ div, p{
   font-size: 0.2rem;
   color: #fff;
 }
+.header_wrap .header .right .language .en {
+  padding: 0.05rem 0.1rem;
+  background: #47dad1;
+  color: #fff;
+  font-size: 0.14rem;
+  margin: 0rem 0.22rem;
+}
 
 /* footer */
 .footer_wrap {
