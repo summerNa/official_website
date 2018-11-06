@@ -33,10 +33,10 @@
   margin-bottom: 0.22rem;
 }
 .list_wrap .list .info div {
-  display: block;
-  width: 0.74rem;
-  height: 0.28rem;
-  line-height: 0.28rem;
+  position: relative;
+  top: -0.6rem;
+  display: inline-block;
+  padding: 0.1rem 0.1rem;
   font-size: 0.14rem;
   text-align: center;
   color: #fff;
@@ -129,6 +129,10 @@
   font-size: 0.5rem;
   color: #fff;
   margin-bottom: 0.6rem;
+}
+.info1 p.en {
+  width: 60%;
+  text-align: left;
 }
 .info1 a {
   display: block;

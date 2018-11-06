@@ -95,6 +95,12 @@ body {
     font-size: 0.2rem;
     color: #fff;
 }
+.content_wrap .content .list .bar.bar2 p span {
+    margin-right: 0.1rem;
+}
+.content_wrap .content .list .bar.bar2 p span#barAvg {
+    margin-left: 0.1rem;
+}
 .content_wrap .content .list .bar.bar2 .addDevice {
     width: 1.1rem;
     height: 0.44rem;
@@ -254,7 +260,7 @@ body {
     margin-right: 6px;
 }
 .content_wrap .content .list .info  ul li .pick .right div {
-    width: 1.1rem;
+    width: 1.5rem;
     height: 0.44rem;
     background: #65a4e9;
     border-radius: 4px;

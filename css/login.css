@@ -196,9 +196,12 @@ div, p{
   border: none;
   margin-top: 0.2rem;
 }
+.con_wrap .con .detail form .input_box.forget a {
+  /* margin-right: 0.4rem; */
+}
 .con_wrap .con .detail form .input_box.forget .for_pass {
   position: absolute;
-  right: 0.6rem;
+  right: 1rem;
   font-weight: 400;
 }
 .con_wrap .con .detail form .input_box.forget .for_reg {

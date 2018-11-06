@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/list.css">
   <title>小宇矿机</title>
 </head>
+
 <body>
   <div class="header_wrap">
     <div class="header">
@@ -19,16 +20,16 @@
       </a>
       <ul class="middle">
         <li>
-          <a href="home.html">首页</a>
+          <a href="home.html">Home</a>
         </li>
         <li>
-          <a href="product.html">产品</a>
+          <a href="product.html">Product</a>
         </li>
         <li>
-          <a href="introduce.html">关于我们</a>
+          <a href="introduce.html">About Us</a>
         </li>
         <li class="actived">
-          <a class="list" href="javascript:;">小宇矿机</a>
+          <a class="list" href="javascript:;">Xiaoyu's Mine Field</a>
         </li>
       </ul>
       <div class="right">
@@ -40,16 +41,16 @@
         </a> -->
         <ul class="loginYet">
           <li class="language">
-            <a class="en" href="">ENGLISH</a>
+            <a class="en" href="../zh1/list.html"><img src="../img/common/en.png" alt=""></a>
           </li>
           <li class="loginY">
-            <a class="usernameAndLogin" href="login.html">登录</a>
+            <a class="usernameAndLogin" href="login.html">Login</a>
           </li>
           <li>
             <div class="line"></div>
           </li>
           <li class="loginY">
-            <a class="logoutAndRegister" href="register.html">注册</a>
+            <a class="logoutAndRegister" href="register.html">Register</a>
           </li>
         </ul>
       </div>
@@ -59,99 +60,100 @@
     <div class="content">
       <div class="top">
         <div class="left">
-          <p class="title">设备状态</p>
+          <p class="title">Device Status</p>
           <ul>
             <li>
               <p class="num" id="allDevice">0</p>
-              <p class="xs_title">玩客设备</p>
+              <p class="xs_title">All Devices</p>
             </li>
             <li>
               <p class="num" id="normalDevice">0</p>
-              <p class="xs_title">正常状态</p>
+              <p class="xs_title">Available</p>
             </li>
             <li>
               <p class="num unusual" id="unusualDevice">0</p>
-              <p class="xs_title">状态异常</p>
+              <p class="xs_title">Abnormal</p>
             </li>
             <li>
               <p class="num off" id="offlineDevice">0</p>
-              <p class="xs_title">设备离线</p>
+              <p class="xs_title">Off-line</p>
             </li>
           </ul>
         </div>
         <div class="right">
-          <p class="title">账户情况</p>
+          <p class="title">Account Overview</p>
           <ul>
             <li>
               <p class="num" id="balance">0</p>
-              <p class="xs_title">可提</p>
+              <p class="xs_title">Balance</p>
             </li>
             <li>
               <p class="num" id="extracted">0</p>
-              <p class="xs_title">已提</p>
+              <p class="xs_title">Withdrawals</p>
             </li>
           </ul>
         </div>
       </div>
       <div class="middle">
-        <p class="title">产量统计</p>
+        <p class="title">Yield Statistics</p>
         <div class="con">
           <div>
-            <p class="xs_title">昨日产量：<span class="num" id="outYesterday">0</span></p>
-            <p class="xs_title">昨日最低：<span class="num" id="minOutYesterday">0</span></p>
+            <p class="xs_title">Output Yesterday：<span class="num" id="outYesterday">0</span></p>
+            <p class="xs_title">Min Output Yesterday：<span class="num" id="minOutYesterday">0</span></p>
           </div>
           <div>
-            <p class="xs_title">昨日平均：<span class="num" id="avgOutYesterday">0</span></p>
-            <p class="xs_title">本月产量：<span class="num" id="outMonthly">0</span></p>
+            <p class="xs_title">Mean Output Yesterday：<span class="num" id="avgOutYesterday">0</span></p>
+            <p class="xs_title">Output of month：<span class="num" id="outMonthly">0</span></p>
           </div>
           <div>
-            <p class="xs_title">昨日最高：<span class="num" id="maxOutYesterday">0</span></p>
-            <p class="xs_title">总产量：<span class="num" id="outTotal">0</span></p>
+            <p class="xs_title">Max Output Yesterday：<span class="num" id="maxOutYesterday">0</span></p>
+            <p class="xs_title">Total Output：<span class="num" id="outTotal">0</span></p>
           </div>
         </div>
 
       </div>
       <div class="list">
-        <p class="title">矿机列表</p>
+        <p class="title">Miner list</p>
         <div class="bar">
           <ul id="classify">
-            <li class="actived">全部</li>
-            <li>正常</li>
-            <li>异常</li>
-            <li>离线</li>
+            <li class="actived">All</li>
+            <li>Available</li>
+            <li>Abnormal</li>
+            <li>Off-line</li>
           </ul>
           <div class="right">
             <div class="input_box">
               <div class="select" id="selectbox1">
-                <p id="selectValue">分组</p>
+                <p id="selectValue">Groups</p>
                 <span class="jiao"></span>
               </div>
               <div class="option hide" id="group">
                 <!-- <p>小组1</p>
                 <p>小组2</p> -->
               </div>
-              <input type="text" class="inputArea" placeholder="搜索">
+              <input type="text" class="inputArea" placeholder="Search">
               <p class="sousuo"></p>
             </div>
           </div>
         </div>
         <div class="bar bar2">
-          <p><span id="barAll">0</span>台，昨日产 <span id="barYest">0</span>，平均 <span id="barAvg">0</span>，可提 <span id="barAgree">0</span></p>
-          <div class="addDevice">添加设备</div>
+          <p><span id="barAll">0</span>devices，Yesterday <span id="barYest">0</span>，mean<span id="barAvg">0</span>，balance
+            <span id="barAgree">0</span></p>
+          <div class="addDevice">Add Device</div>
         </div>
         <div class="bar bar3">
           <ul>
-            <li class="fenzu" dir="up">分组<img class="arrow" src="" alt=""></li>
-            <li class="mingcheng" dir="up">名称<img class="arrow" src="" alt=""></li>
-            <li class="chanliang" dir="up">产量<img class="arrow" src="" alt=""></li>
-            <li class="keti" dir="up">可提<img class="arrow" src="" alt=""></li>
+            <li class="fenzu" dir="up">Groups<img class="arrow" src="" alt=""></li>
+            <li class="mingcheng" dir="up">Name<img class="arrow" src="" alt=""></li>
+            <li class="chanliang" dir="up">Yield<img class="arrow" src="" alt=""></li>
+            <li class="keti" dir="up">Balance<img class="arrow" src="" alt=""></li>
           </ul>
           <ul class="search">
             <li class="boxBtn" id="allCoin">
-              提币
+              Withdraw
             </li>
             <li class="boxBtn" id="allStart">
-              刷新
+              Refresh
             </li>
           </ul>
         </div>
@@ -193,7 +195,7 @@
 
     params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '"}');
     $.ajax({
-      url: 'http://api.xiaoyu.chat/live/Devicesumary/getTheDeviceSumary?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+      url: '/api/live/Devicesumary/getTheDeviceSumary?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
       type: 'GET',
       dataType: 'JSON',
       beforeSend: function (request) {
@@ -224,7 +226,7 @@
 
     // 获取用户名下的分组
     $.ajax({
-      url: 'http://api.xiaoyu.chat/live/Devicemanager/getDeviceGroup?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+      url: '/api/live/Devicemanager/getDeviceGroup?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
       type: 'GET',
       dataType: 'JSON',
       beforeSend: function (request) {
@@ -280,7 +282,7 @@
     function getList() {
       $('.arrow').attr('src', '');
       $.ajax({
-        url: 'http://api.xiaoyu.chat/live/Devicemanager/getDeviceList?header={"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params2,
+        url: '/api/live/Devicemanager/getDeviceList?header={"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params2,
         type: 'GET',
         dataType: 'JSON',
         beforeSend: function (request) {
@@ -300,11 +302,11 @@
                 before_day = Number(data.body.device_info.device_list[i].before_day).toFixed(2);
                 balance = Number(data.body.device_info.device_list[i].balance).toFixed(2);
                 if (data.body.device_info.device_list[i].status === 'offline') {
-                  sta = '离线';
+                  sta = 'Off-line';
                 } else if (data.body.device_info.device_list[i].status === 'online') {
-                  sta = '正常';
+                  sta = 'Avaliable';
                 } else {
-                  sta = '异常';
+                  sta = 'Abnormal';
                 }
                 if (!data.body.device_info.device_list[i].disk_info.length) {
                   used = 0;
@@ -315,8 +317,8 @@
                 }
                 day = ((Number(Date.parse(new Date()) / 1000) - Number(data.body.device_info.device_list[i].bind_time)) / 60 / 60 / 24).toFixed();
                 content += '<div class="pick"><div class="up"><p class="name">' + data.body.device_info.device_list[i].device_name
-                  + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div><img src="img/common/tongji.png">统计</div><div><img src="img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
-                  + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>账号:<span>' + data.body.device_info.device_list[i].wky_account + '</span></p><p>激活天数:<span>' + day +
+                  + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>Balance：<span>' + balance + '</span></p><div class="right"><div><img src="../img/common/tongji.png">Statistics</div><div><img src="../img/common/caozuo.png">Operate</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
+                  + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>Account:<span>' + data.body.device_info.device_list[i].wky_account + '</span></p><p>Activated Days:<span>' + day +
                   '</span></p></div><div class="line"><p>IP:<span>' + data.body.device_info.device_list[i].ip + '</span></p></div></div></div>';
               }
               $('.listCon').empty();
@@ -337,7 +339,7 @@
     $("#allCoin").on('click', function () {
       params4 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":1}');
       $.ajax({
-        url: 'http://api.xiaoyu.chat/live/Devicemanager/drawCoin?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params4,
+        url: '/api/live/Devicemanager/drawCoin?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params4,
         type: 'GET',
         dataType: 'JSON',
         beforeSend: function (request) {
@@ -359,7 +361,7 @@
     $("#allStart").on('click', function () {
       params4 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '"}');
       $.ajax({
-        url: 'http://api.xiaoyu.chat/live/Devicemanager/refreshDevice?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params4,
+        url: '/api/live/Devicemanager/refreshDevice?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params4,
         type: 'GET',
         dataType: 'JSON',
         beforeSend: function (request) {
@@ -444,26 +446,25 @@
         yes_wkb = Number(arrList[i].yes_wkb).toFixed(2);
         before_day = Number(arrList[i].before_day).toFixed(2);
         balance = Number(arrList[i].balance).toFixed(2);
-        if (arrList[i].status === 'offline') {
-          sta = '离线';
-        } else if (arrList[i].status === 'online') {
-          sta = '正常';
+        if (data.body.device_info.device_list[i].status === 'offline') {
+          sta = 'Off-line';
+        } else if (data.body.device_info.device_list[i].status === 'online') {
+          sta = 'Avaliable';
         } else {
-          sta = '异常';
+          sta = 'Abnormal';
         }
-        if (!arrList[i].disk_info.length) {
+        if (!data.body.device_info.device_list[i].disk_info.length) {
           used = 0;
           all = 0;
         } else {
-          used = (Number(arrList[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed();
-          all = (Number(arrList[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed();
+          used = (Number(data.body.device_info.device_list[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed();
+          all = (Number(data.body.device_info.device_list[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed();
         }
-        day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].bind_time)) / 60 / 60 / 24).toFixed();
-        content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
-          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div><img src="img/common/tongji.png">统计</div><div><img src="img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>'
-          + arrList[i].device_sn
-          + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>账号:<span>' + arrList[i].wky_account + '</span></p><p>激活天数:<span>' + day +
-          '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
+        day = ((Number(Date.parse(new Date()) / 1000) - Number(data.body.device_info.device_list[i].bind_time)) / 60 / 60 / 24).toFixed();
+        content += '<div class="pick"><div class="up"><p class="name">' + data.body.device_info.device_list[i].device_name
+          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>Balance：<span>' + balance + '</span></p><div class="right"><div><img src="../img/common/tongji.png">Statistics</div><div><img src="../img/common/caozuo.png">Operate</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
+          + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>Account:<span>' + data.body.device_info.device_list[i].wky_account + '</span></p><p>Activated Days:<span>' + day +
+          '</span></p></div><div class="line"><p>IP:<span>' + data.body.device_info.device_list[i].ip + '</span></p></div></div></div>';
       }
       $('.listCon').empty();
       $('.listCon').append(content);
@@ -486,26 +487,25 @@
         yes_wkb = Number(arrList[i].yes_wkb).toFixed(2);
         before_day = Number(arrList[i].before_day).toFixed(2);
         balance = Number(arrList[i].balance).toFixed(2);
-        if (arrList[i].status === 'offline') {
-          sta = '离线';
-        } else if (arrList[i].status === 'online') {
-          sta = '正常';
+        if (data.body.device_info.device_list[i].status === 'offline') {
+          sta = 'Off-line';
+        } else if (data.body.device_info.device_list[i].status === 'online') {
+          sta = 'Avaliable';
         } else {
-          sta = '异常';
+          sta = 'Abnormal';
         }
-        if (!arrList[i].disk_info.length) {
+        if (!data.body.device_info.device_list[i].disk_info.length) {
           used = 0;
           all = 0;
         } else {
-          used = (Number(arrList[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed();
-          all = (Number(arrList[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed();
+          used = (Number(data.body.device_info.device_list[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed();
+          all = (Number(data.body.device_info.device_list[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed();
         }
-        day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].bind_time)) / 60 / 60 / 24).toFixed();
-        content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
-          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div><img src="img/common/tongji.png">统计</div><div><img src="img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>'
-          + arrList[i].device_sn
-          + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>账号:<span>' + arrList[i].wky_account + '</span></p><p>激活天数:<span>' + day +
-          '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
+        day = ((Number(Date.parse(new Date()) / 1000) - Number(data.body.device_info.device_list[i].bind_time)) / 60 / 60 / 24).toFixed();
+        content += '<div class="pick"><div class="up"><p class="name">' + data.body.device_info.device_list[i].device_name
+          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>Balance：<span>' + balance + '</span></p><div class="right"><div><img src="../img/common/tongji.png">Statistics</div><div><img src="../img/common/caozuo.png">Operate</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
+          + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>Account:<span>' + data.body.device_info.device_list[i].wky_account + '</span></p><p>Activated Days:<span>' + day +
+          '</span></p></div><div class="line"><p>IP:<span>' + data.body.device_info.device_list[i].ip + '</span></p></div></div></div>';
       }
       $('.listCon').empty();
       $('.listCon').append(content);
@@ -529,26 +529,25 @@
         yes_wkb = Number(arrList[i].yes_wkb).toFixed(2);
         before_day = Number(arrList[i].before_day).toFixed(2);
         balance = Number(arrList[i].balance).toFixed(2);
-        if (arrList[i].status === 'offline') {
-          sta = '离线';
-        } else if (arrList[i].status === 'online') {
-          sta = '正常';
+        if (data.body.device_info.device_list[i].status === 'offline') {
+          sta = 'Off-line';
+        } else if (data.body.device_info.device_list[i].status === 'online') {
+          sta = 'Avaliable';
         } else {
-          sta = '异常';
+          sta = 'Abnormal';
         }
-        if (!arrList[i].disk_info.length) {
+        if (!data.body.device_info.device_list[i].disk_info.length) {
           used = 0;
           all = 0;
         } else {
-          used = (Number(arrList[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed();
-          all = (Number(arrList[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed();
+          used = (Number(data.body.device_info.device_list[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed();
+          all = (Number(data.body.device_info.device_list[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed();
         }
-        day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].bind_time)) / 60 / 60 / 24).toFixed();
-        content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
-          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div><img src="img/common/tongji.png">统计</div><div><img src="img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>'
-          + arrList[i].device_sn
-          + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>账号:<span>' + arrList[i].wky_account + '</span></p><p>激活天数:<span>' + day +
-          '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
+        day = ((Number(Date.parse(new Date()) / 1000) - Number(data.body.device_info.device_list[i].bind_time)) / 60 / 60 / 24).toFixed();
+        content += '<div class="pick"><div class="up"><p class="name">' + data.body.device_info.device_list[i].device_name
+          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>Balance：<span>' + balance + '</span></p><div class="right"><div><img src="../img/common/tongji.png">Statistics</div><div><img src="../img/common/caozuo.png">Operate</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
+          + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>Account:<span>' + data.body.device_info.device_list[i].wky_account + '</span></p><p>Activated Days:<span>' + day +
+          '</span></p></div><div class="line"><p>IP:<span>' + data.body.device_info.device_list[i].ip + '</span></p></div></div></div>';
       }
       $('.listCon').empty();
       $('.listCon').append(content);
@@ -571,26 +570,25 @@
         yes_wkb = Number(arrList[i].yes_wkb).toFixed(2);
         before_day = Number(arrList[i].before_day).toFixed(2);
         balance = Number(arrList[i].balance).toFixed(2);
-        if (arrList[i].status === 'offline') {
-          sta = '离线';
-        } else if (arrList[i].status === 'online') {
-          sta = '正常';
+        if (data.body.device_info.device_list[i].status === 'offline') {
+          sta = 'Off-line';
+        } else if (data.body.device_info.device_list[i].status === 'online') {
+          sta = 'Avaliable';
         } else {
-          sta = '异常';
+          sta = 'Abnormal';
         }
-        if (!arrList[i].disk_info.length) {
+        if (!data.body.device_info.device_list[i].disk_info.length) {
           used = 0;
           all = 0;
         } else {
-          used = (Number(arrList[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed();
-          all = (Number(arrList[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed();
+          used = (Number(data.body.device_info.device_list[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed();
+          all = (Number(data.body.device_info.device_list[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed();
         }
-        day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].bind_time)) / 60 / 60 / 24).toFixed();
-        content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
-          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div><img src="img/common/tongji.png">统计</div><div><img src="img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>'
-          + arrList[i].device_sn
-          + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>账号:<span>' + arrList[i].wky_account + '</span></p><p>激活天数:<span>' + day +
-          '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
+        day = ((Number(Date.parse(new Date()) / 1000) - Number(data.body.device_info.device_list[i].bind_time)) / 60 / 60 / 24).toFixed();
+        content += '<div class="pick"><div class="up"><p class="name">' + data.body.device_info.device_list[i].device_name
+          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>Balance：<span>' + balance + '</span></p><div class="right"><div><img src="../img/common/tongji.png">Statistics</div><div><img src="../img/common/caozuo.png">Operate</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
+          + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>Account:<span>' + data.body.device_info.device_list[i].wky_account + '</span></p><p>Activated Days:<span>' + day +
+          '</span></p></div><div class="line"><p>IP:<span>' + data.body.device_info.device_list[i].ip + '</span></p></div></div></div>';
       }
       $('.listCon').empty();
       $('.listCon').append(content);

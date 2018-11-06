@@ -40,7 +40,7 @@
         </a> -->
         <ul class="loginYet">
           <li class="language">
-            <a class="en" href="../en1/list.html">ENGLISH</a>
+            <a class="en" href="../en1/list.html"><img src="../img/common/zh.png" alt=""></a>
           </li>
           <li class="loginY">
             <a class="usernameAndLogin" href="login.html">登录</a>
@@ -193,7 +193,7 @@
 
     params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '"}');
     $.ajax({
-      url: 'http://api.xiaoyu.chat/live/Devicesumary/getTheDeviceSumary?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+      url: '/api/live/Devicesumary/getTheDeviceSumary?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
       type: 'GET',
       dataType: 'JSON',
       beforeSend: function (request) {
@@ -224,7 +224,7 @@
 
     // 获取用户名下的分组
     $.ajax({
-      url: 'http://api.xiaoyu.chat/live/Devicemanager/getDeviceGroup?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+      url: '/api/live/Devicemanager/getDeviceGroup?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
       type: 'GET',
       dataType: 'JSON',
       beforeSend: function (request) {
@@ -266,13 +266,22 @@
     $("#group").on('click', '.gr', function () {
       $("#group").addClass('hide');
       group_id = $(this).attr('id');
-      console.log(666)
-      params2 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":"' + is_all + '","state":"' + state + '","group_id":"' + group_id + '"}');
+      if(is_all === 1) {
+        params2 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":"0","state":"' + state + '","group_id":"' + group_id + '"}');
+      } else {
+        params2 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":"' + is_all + '","state":"' + state + '","group_id":"' + group_id + '"}');
+      }
+      
       getList();
     });
 
     $(".sousuo").on('click', function () {
-      params2 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":"' + is_all + '","state":"' + state + '","group_id":"' + group_id + '","key_word": "' + $('.inputArea').val() + '"}');
+      if(is_all === 1) {
+        params2 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":"0","state":"' + state + '","group_id":"' + group_id + '","key_word": "' + $('.inputArea').val() + '"}');
+      } else {
+        params2 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":"' + is_all + '","state":"' + state + '","group_id":"' + group_id + '","key_word": "' + $('.inputArea').val() + '"}');
+      }
+      
       $('.inputArea').val('');
       getList();
     });
@@ -280,7 +289,7 @@
     function getList() {
       $('.arrow').attr('src', '');
       $.ajax({
-        url: 'http://api.xiaoyu.chat/live/Devicemanager/getDeviceList?header={"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params2,
+        url: '/api/live/Devicemanager/getDeviceList?header={"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params2,
         type: 'GET',
         dataType: 'JSON',
         beforeSend: function (request) {
@@ -315,7 +324,7 @@
                 }
                 day = ((Number(Date.parse(new Date()) / 1000) - Number(data.body.device_info.device_list[i].bind_time)) / 60 / 60 / 24).toFixed();
                 content += '<div class="pick"><div class="up"><p class="name">' + data.body.device_info.device_list[i].device_name
-                  + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div><img src="img/common/tongji.png">统计</div><div><img src="img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
+                  + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div><img src="../img/common/tongji.png">统计</div><div><img src="../img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
                   + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>账号:<span>' + data.body.device_info.device_list[i].wky_account + '</span></p><p>激活天数:<span>' + day +
                   '</span></p></div><div class="line"><p>IP:<span>' + data.body.device_info.device_list[i].ip + '</span></p></div></div></div>';
               }
@@ -323,6 +332,7 @@
               $('.listCon').append(content);
             } else {
               $('.listCon').empty();
+              arrList = [];
             }
 
           }
@@ -337,7 +347,7 @@
     $("#allCoin").on('click', function () {
       params4 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":1}');
       $.ajax({
-        url: 'http://api.xiaoyu.chat/live/Devicemanager/drawCoin?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params4,
+        url: '/api/live/Devicemanager/drawCoin?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params4,
         type: 'GET',
         dataType: 'JSON',
         beforeSend: function (request) {
@@ -359,7 +369,7 @@
     $("#allStart").on('click', function () {
       params4 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '"}');
       $.ajax({
-        url: 'http://api.xiaoyu.chat/live/Devicemanager/refreshDevice?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params4,
+        url: '/api/live/Devicemanager/refreshDevice?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params4,
         type: 'GET',
         dataType: 'JSON',
         beforeSend: function (request) {
@@ -428,6 +438,7 @@
     }
 
     $('.fenzu').on('click', function () {
+      console.log(arrList)
       if ($(this).attr('dir') === 'up') {
         $(this).attr('dir', 'down');
         $(this).siblings().children('.arrow').attr('src', '');
@@ -460,7 +471,7 @@
         }
         day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].bind_time)) / 60 / 60 / 24).toFixed();
         content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
-          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div><img src="img/common/tongji.png">统计</div><div><img src="img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>'
+          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div><img src="../img/common/tongji.png">统计</div><div><img src="../img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>'
           + arrList[i].device_sn
           + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>账号:<span>' + arrList[i].wky_account + '</span></p><p>激活天数:<span>' + day +
           '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
@@ -502,7 +513,7 @@
         }
         day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].bind_time)) / 60 / 60 / 24).toFixed();
         content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
-          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div><img src="img/common/tongji.png">统计</div><div><img src="img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>'
+          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div><img src="../img/common/tongji.png">统计</div><div><img src="../img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>'
           + arrList[i].device_sn
           + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>账号:<span>' + arrList[i].wky_account + '</span></p><p>激活天数:<span>' + day +
           '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
@@ -545,7 +556,7 @@
         }
         day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].bind_time)) / 60 / 60 / 24).toFixed();
         content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
-          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div><img src="img/common/tongji.png">统计</div><div><img src="img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>'
+          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div><img src="../img/common/tongji.png">统计</div><div><img src="../img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>'
           + arrList[i].device_sn
           + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>账号:<span>' + arrList[i].wky_account + '</span></p><p>激活天数:<span>' + day +
           '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
@@ -587,7 +598,7 @@
         }
         day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].bind_time)) / 60 / 60 / 24).toFixed();
         content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
-          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div><img src="img/common/tongji.png">统计</div><div><img src="img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>'
+          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div><img src="../img/common/tongji.png">统计</div><div><img src="../img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>'
           + arrList[i].device_sn
           + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>账号:<span>' + arrList[i].wky_account + '</span></p><p>激活天数:<span>' + day +
           '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';

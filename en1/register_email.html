@@ -20,13 +20,13 @@
       </a>
       <ul class="middle">
         <li>
-          <a href="home.html">首页</a>
+          <a href="home.html">Home</a>
         </li>
         <li>
-          <a href="product.html">产品</a>
+          <a href="product.html">Product</a>
         </li>
         <li>
-          <a href="introduce.html">关于我们</a>
+          <a href="introduce.html">About Us</a>
         </li>
         <li class="">
           <a class="list" href="javascript:;">小宇矿机</a>
@@ -41,16 +41,16 @@
         </a> -->
         <ul class="loginYet">
           <li class="language">
-            <a class="en" href="">ENGLISH</a>
+            <a class="en" href="../zh1/home.html"><img src="../img/common/en.png" alt=""></a>
           </li>
           <li class="loginY">
-            <a class="usernameAndLogin" href="login.html">登录</a>
+            <a class="usernameAndLogin" href="login.html">Login</a>
           </li>
           <li>
             <div class="line"></div>
           </li>
           <li class="loginY">
-            <a class="logoutAndRegister" href="register.html">注册</a>
+            <a class="logoutAndRegister" href="register.html">Register</a>
           </li>
         </ul>
       </div>
@@ -58,7 +58,7 @@
   </div>
   <div class="con_wrap">
     <div class="con">
-      <a class="email" href="register.html">手机注册</a>
+      <a class="email" href="register.html">Mobile registration</a>
       <div class="top">邮箱注册</div>
       <div class="detail">
         <form action="">
@@ -75,23 +75,23 @@
             </div> -->
             <!-- <input type="text" class="phone" placeholder="手机号" id="phoneInput" autocomplete="off"/> -->
             <!-- <div class="input_box"> -->
-            <input type="text" class="pass" placeholder="邮箱" id="phoneInput" autocomplete="off" />
+            <input type="text" class="pass" placeholder="Mailbox" id="phoneInput" autocomplete="off" />
             <!-- </div> -->
           </div>
           <div class="input_box sm">
-            <input type="text" placeholder="验证码" class="code" id="code" autocomplete="off" />
-            <a href="javascript:;" class="send" id="sendCode">发送验证码</a>
+            <input type="text" placeholder="PIN" class="code" id="code" autocomplete="off" />
+            <a href="javascript:;" class="send" id="sendCode">PIN SMS</a>
           </div>
           <div class="input_box">
-            <input type="password" placeholder="6-20位密码，字母、数字、符号都可以" class="pass" id="password" autocomplete="off">
+            <input type="password" placeholder="New Password" class="pass" id="password" autocomplete="off">
           </div>
           <div class="input_box yes">
             <input type="checkbox" id="isAgree" />我已阅读并接受<span id="agreement" class="agreement">用户协议</span>
           </div>
           <a href="javascript:;" class="input_box register" id="register">
-            注册
+            Register
           </a>
-          <p class="tips">*信息有误！</p>
+          <p class="tips">*Information id wrong！</p>
         </form>
       </div>
     </div>
@@ -509,7 +509,7 @@
                     clearInterval(timer);
                     flag = true;
                     $('.send').removeClass('sendGrey');
-                    $('.send').text('发送验证码');
+                    $('.send').text('PIN SMS');
                   }
                 }, 1000);
               }
@@ -521,7 +521,7 @@
         }
       } else {
         $('.tips').addClass('actived');
-        $('.tips').html('请输入有效的邮箱');
+        $('.tips').html('lease enter a valid mailbox.');
       }
     });
 
