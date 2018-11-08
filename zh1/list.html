@@ -28,7 +28,7 @@
           <a href="introduce.html">关于我们</a>
         </li>
         <li class="actived">
-          <a class="list" href="javascript:;">小宇矿机</a>
+          <a class="list" href="javascript:;">小宇监工</a>
         </li>
       </ul>
       <div class="right">
@@ -49,7 +49,7 @@
             <div class="line"></div>
           </li>
           <li class="loginY">
-            <a class="logoutAndRegister" href="register.html">注册</a>
+            <a class="logoutAndRegister" href="register_phone.html">注册</a>
           </li>
         </ul>
       </div>
@@ -193,7 +193,7 @@
 
     params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '"}');
     $.ajax({
-      url: '/api/live/Devicesumary/getTheDeviceSumary?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+      url: 'http://api.xiaoyu.chat/live/Devicesumary/getTheDeviceSumary?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
       type: 'GET',
       dataType: 'JSON',
       beforeSend: function (request) {
@@ -224,7 +224,7 @@
 
     // 获取用户名下的分组
     $.ajax({
-      url: '/api/live/Devicemanager/getDeviceGroup?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+      url: 'http://api.xiaoyu.chat/live/Devicemanager/getDeviceGroup?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
       type: 'GET',
       dataType: 'JSON',
       beforeSend: function (request) {
@@ -289,7 +289,7 @@
     function getList() {
       $('.arrow').attr('src', '');
       $.ajax({
-        url: '/api/live/Devicemanager/getDeviceList?header={"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params2,
+        url: 'http://api.xiaoyu.chat/live/Devicemanager/getDeviceList?header={"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params2,
         type: 'GET',
         dataType: 'JSON',
         beforeSend: function (request) {
@@ -347,7 +347,7 @@
     $("#allCoin").on('click', function () {
       params4 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":1}');
       $.ajax({
-        url: '/api/live/Devicemanager/drawCoin?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params4,
+        url: 'http://api.xiaoyu.chat/live/Devicemanager/drawCoin?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params4,
         type: 'GET',
         dataType: 'JSON',
         beforeSend: function (request) {
@@ -369,7 +369,7 @@
     $("#allStart").on('click', function () {
       params4 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '"}');
       $.ajax({
-        url: '/api/live/Devicemanager/refreshDevice?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params4,
+        url: 'http://api.xiaoyu.chat/live/Devicemanager/refreshDevice?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params4,
         type: 'GET',
         dataType: 'JSON',
         beforeSend: function (request) {
@@ -620,7 +620,7 @@
 
     // 添加设备
     $('.addDevice').on('click', function () {
-      window.location.href = 'import.html';
+      window.open("import.html");
     });
   })
 

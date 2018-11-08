@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/common.css">
-  <link rel="stylesheet" href="css/register.css">
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/register.css">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico" />
   <title>手机注册</title>
 </head>
 
@@ -16,7 +16,7 @@
   <div class="header_wrap">
     <div class="header">
       <a href="home.html" class="left">
-        <img src="img/common/logo.png" alt="">
+        <img src="../img/common/logo.png" alt="">
       </a>
       <ul class="middle">
         <li>
@@ -29,7 +29,7 @@
           <a href="introduce.html">关于我们</a>
         </li>
         <li class="">
-          <a class="list" href="javascript:;">小宇矿机</a>
+          <a class="list" href="javascript:;">小宇监工</a>
         </li>
       </ul>
       <div class="right">
@@ -40,6 +40,9 @@
           <p class="in">导入</p>
         </a> -->
         <ul class="loginYet">
+          <li class="language">
+            <a class="en" href="../en1/register_phone.html"><img src="../img/common/zh.png" alt=""></a>
+          </li>
           <li class="loginY">
             <a class="usernameAndLogin" href="login.html">登录</a>
           </li>
@@ -47,7 +50,7 @@
             <div class="line"></div>
           </li>
           <li class="loginY">
-            <a class="logoutAndRegister" href="register.html">注册</a>
+            <a class="logoutAndRegister" href="register_phone.html">注册</a>
           </li>
         </ul>
       </div>
@@ -415,8 +418,8 @@
   </div>
 
 </body>
-<script src="js/jquery-1.9.1.min.js"></script>
-<script src="js/common.js"></script>
+<script src="../js/jquery-1.9.1.min.js"></script>
+<script src="../js/common.js"></script>
 <script>
   $(document).ready(function () {
     var regPhone = /^1[3|4|5|7|8|9]\d{9}$/;  // 手机号正则表达式

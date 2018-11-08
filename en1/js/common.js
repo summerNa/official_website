@@ -4,7 +4,7 @@ if (isLoginS) {
   if(Object.keys(isLogin).length) {
     $('.usernameAndLogin').attr('href', 'javascript:;');
     $('.usernameAndLogin').html(isLogin.phone.substr(0, 3) + '****' + isLogin.phone.substr(7));
-    $('.logoutAndRegister').html('退出');
+    $('.logoutAndRegister').html('Logout');
     $('.logoutAndRegister').attr('href', 'javascript:;');
   }
   $('.logoutAndRegister').on('click', function() {
