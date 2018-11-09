@@ -14,7 +14,7 @@
 
 <body>
   <div class="header_wrap">
-    <!-- <div class="header">
+    <div class="header">
       <a href="home.html" class="left">
         <img src="../img/common/logo.png" alt="">
       </a>
@@ -48,12 +48,38 @@
           </li>
         </ul>
       </div>
-    </div> -->
+    </div>
   </div>
   <div class="content_wrap">
     <div class="content">
-      <!-- <p class="title">产量趋势图</p> -->
-      <div id="main" style="width: 13.6rem;height:400px;"></div>
+      <p class="title">产量趋势图</p>
+      <p class="sm-title">产量</p>
+      <p class="mm-title">hui</p>
+      <div id="main" style="width: 13.6rem;height:4rem;"></div>
+      <div class="btnWrap">
+        <div class="active">7天</div>
+        <div>30天</div>
+        <div>全部</div>
+      </div>
+      <div class="btnWrap2">
+        <p>产量详情</p>
+        <p>提取详情</p>
+      </div>
+      <div class="tableBox">
+        <table>
+          <thead>
+            <th>日期</th>
+            <th>产量</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>20181101</td>
+              <td>0.50</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
   </div>
   </div>
@@ -76,8 +102,15 @@
       wW = window.innerWidth;
       rem = wW * whdef;
       $('html').css('font-size', rem + "px");
-      myChart.resize(); 
+      myChart.resize();
     });
+
+    function getQueryString(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) return unescape(r[2]); return null;
+    }
+    var userid = getQueryString("userid"); // 获取参数
 
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
@@ -104,9 +137,45 @@
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
 
-    params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","device_userid":"OCPZ11B049782"}');
+    params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","device_userid":"'+ userid +'"}');
     $.ajax({
       url: '/api/live/Devicemanager/getTheDeviceOutputTrendr?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+      type: 'GET',
+      dataType: 'JSON',
+      beforeSend: function (request) {
+      },
+      success: function (data) {
+        if (data.header.retStatus !== 200) {
+        } else {
+          console.log(data)
+        }
+      },
+      error: function (error) {
+        console.log('error');
+      }
+    });
+
+    params2 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","device_userid":"'+ userid +'"}');
+    $.ajax({
+      url: '/api/live/Devicemanager/getDrawalHistory?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params2,
+      type: 'GET',
+      dataType: 'JSON',
+      beforeSend: function (request) {
+      },
+      success: function (data) {
+        if (data.header.retStatus !== 200) {
+        } else {
+          console.log(data)
+        }
+      },
+      error: function (error) {
+        console.log('error');
+      }
+    });
+
+    params3 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","device_userid":"'+ userid +'"}');
+    $.ajax({
+      url: '/api/live/Devicemanager/getIncomtHistory?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params3,
       type: 'GET',
       dataType: 'JSON',
       beforeSend: function (request) {

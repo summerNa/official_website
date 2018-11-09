@@ -9,4 +9,70 @@ body {
   margin: 0 auto;
   margin-top: 0.4rem;
   background: #fff;
+  padding: 10px 10px 50px 20px;
+  box-sizing: border-box;
+}
+.content_wrap .content .title {
+  font-size: 0.22rem;
+}
+.content_wrap .content .sm-title {
+  font-size: 0.2rem;
+  margin-top: 0.18rem;
+}
+.content_wrap .content .mm-title {
+  font-size: 0.22rem;
+  margin-top: 0.18rem;
+}
+.content_wrap .content .btnWrap {
+  width: 6rem;
+  margin: 0 auto;
+  display: flex;
+}
+.content_wrap .content .btnWrap div{
+  width: 2rem;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  text-align: center;
+  font-size: 0.22rem;
+  border-radius: 4px;
+  color: #218bff;
+  border: 1px solid #218bff;
+}
+.content_wrap .content .btnWrap div.active {
+  background: #218bff;
+  color: #fff;
+}
+.content_wrap .content .btnWrap2 {
+  display: flex;
+  margin-top: 0.5rem;
+}
+.content_wrap .content .btnWrap2 p {
+  font-size: 0.22rem;
+  margin-right: 1rem;
+}
+.content_wrap .content .tableBox {
+  height: 300px;
+  overflow-y: auto;
+  margin-top: 0.6rem;
+} 
+.content_wrap .content table {
+  width: 100%;
+}
+.content_wrap .content table th, .content_wrap .content table td {
+  font-size: 0.22rem;
+}
+.content_wrap .content table th {
+  background: #eee;
+}
+.content_wrap .content table tr {
+  width: 100%;
+  height: 0.5rem;
+  line-height: 0.5rem;
+}
+.content_wrap .content table tr td {
+  width: 50%;
+  text-align: center;
+}
+.content_wrap .content table tbody tr:nth-child(even) {
+  background: #eee;
 }

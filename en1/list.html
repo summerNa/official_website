@@ -318,7 +318,7 @@
                   used = (Number(data.body.device_info.device_list[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed() + 'G';
                   all = (Number(data.body.device_info.device_list[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed() + 'G';
                 }
-                day = ((Number(Date.parse(new Date()) / 1000) - Number(data.body.device_info.device_list[i].bind_time)) / 60 / 60 / 24).toFixed();
+                day = ((Number(Date.parse(new Date()) / 1000) - Number(data.body.device_info.device_list[i].features.onecloud_coin)) / 3600 / 24).toFixed();
 
                 content += '<div class="pick"><div class="up"><p class="name">' + data.body.device_info.device_list[i].device_name
                   + '<span class="status2">' + data.body.device_info.device_list[i].group_name
@@ -469,7 +469,7 @@
           used = (Number(arrList[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed() + 'G';
           all = (Number(arrList[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed() + 'G';
         }
-        day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].bind_time)) / 60 / 60 / 24).toFixed();
+        day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].features.onecloud_coin)) / 3600 / 24).toFixed();
 
         content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
           + '<span class="status2">' + arrList[i].group_name
@@ -515,7 +515,7 @@
           used = (Number(arrList[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed() + 'G';
           all = (Number(arrList[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed() + 'G';
         }
-        day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].bind_time)) / 60 / 60 / 24).toFixed();
+        day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].features.onecloud_coin)) / 3600 / 24).toFixed();
 
         content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
           + '<span class="status2">' + arrList[i].group_name
@@ -562,7 +562,7 @@
           used = (Number(arrList[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed() + 'G';
           all = (Number(arrList[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed() + 'G';
         }
-        day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].bind_time)) / 60 / 60 / 24).toFixed();
+        day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].features.onecloud_coin)) / 3600 / 24).toFixed();
 
         content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
           + '<span class="status2">' + arrList[i].group_name
@@ -608,7 +608,7 @@
           used = (Number(arrList[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed() + 'G';
           all = (Number(arrList[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed() + 'G';
         }
-        day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].bind_time)) / 60 / 60 / 24).toFixed();
+        day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].features.onecloud_coin)) / 3600 / 24).toFixed();
 
         content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
           + '<span class="status2">' + arrList[i].group_name
