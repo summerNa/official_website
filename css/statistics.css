@@ -1,0 +1,12 @@
+body {
+  background: #ebebeb;
+  padding-bottom: 2rem;
+}
+.content_wrap {}
+.content_wrap .content {
+  position: relative;
+  width: 13.6rem;
+  margin: 0 auto;
+  margin-top: 0.4rem;
+  background: #fff;
+}

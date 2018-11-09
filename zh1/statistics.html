@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/statistics.css">
+  <title>统计</title>
+</head>
+
+<body>
+  <div class="header_wrap">
+    <!-- <div class="header">
+      <a href="home.html" class="left">
+        <img src="../img/common/logo.png" alt="">
+      </a>
+      <ul class="middle">
+        <li>
+          <a href="home.html">首页</a>
+        </li>
+        <li>
+          <a href="product.html">产品</a>
+        </li>
+        <li>
+          <a href="introduce.html">关于我们</a>
+        </li>
+        <li class="">
+          <a class="list" href="javascript:;">小宇监工</a>
+        </li>
+      </ul>
+      <div class="right">
+        <ul class="loginYet">
+          <li class="language">
+            <a class="en" href="../en1/list.html"><img src="../img/common/zh.png" alt=""></a>
+          </li>
+          <li class="loginY">
+            <a class="usernameAndLogin" href="login.html">登录</a>
+          </li>
+          <li>
+            <div class="line"></div>
+          </li>
+          <li class="loginY">
+            <a class="logoutAndRegister" href="register_phone.html">注册</a>
+          </li>
+        </ul>
+      </div>
+    </div> -->
+  </div>
+  <div class="content_wrap">
+    <div class="content">
+      <!-- <p class="title">产量趋势图</p> -->
+      <div id="main" style="width: 13.6rem;height:400px;"></div>
+    </div>
+  </div>
+  </div>
+</body>
+<script src="../js/jquery-1.9.1.min.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/echarts.simple.min.js"></script>
+<script>
+  $(document).ready(function () {
+
+    var whdef = 100 / 1920; // 表示1920的设计图,使用100PX的默认值
+    var wH = window.innerHeight; // 当前窗口的高度
+    var wW = window.innerWidth; // 当前窗口的宽度
+    var rem = wW * whdef; // 以默认比例值乘以当前窗口宽度,得到该宽度下的相应FONT-SIZE值
+    $('html').css('font-size', rem + "px");
+
+    $(window).resize(function () {
+      wH = window.innerHeight;
+      wW = window.innerWidth;
+      rem = wW * whdef;
+      $('html').css('font-size', rem + "px");
+      myChart.resize(); 
+    });
+
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    var option = {
+      title: {
+        text: 'ECharts 入门示例'
+      },
+      tooltip: {},
+      legend: {
+        data: ['销量']
+      },
+      xAxis: {
+        data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+      },
+      yAxis: {},
+      series: [{
+        name: '销量',
+        type: 'line',
+        data: [5, 20, 36, 10, 10, 20]
+      }]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+    params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","device_userid":"OCPZ11B049782"}');
+    $.ajax({
+      url: '/api/live/Devicemanager/getTheDeviceOutputTrendr?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+      type: 'GET',
+      dataType: 'JSON',
+      beforeSend: function (request) {
+      },
+      success: function (data) {
+        if (data.header.retStatus !== 200) {
+        } else {
+          console.log(data)
+        }
+      },
+      error: function (error) {
+        console.log('error');
+      }
+    });
+
+  })
+
+</script>
+
+</html>
