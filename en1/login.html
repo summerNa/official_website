@@ -73,7 +73,7 @@
             </div>
             <input type="text" class="phone" placeholder="手机号" id="phoneInput"/>
           </div> -->
-            <input type="text" class="pass" placeholder="Phone Number" id="phoneInput"/>
+            <input type="text" class="pass" placeholder="Phone Number or Email" id="phoneInput"/>
           </div>
           <div class="input_box">
             <input type="password" placeholder="Password" class="pass" id="password">
@@ -99,6 +99,7 @@
 <script>
   $(document).ready(function () {
     var regPhone = /^1[3|4|5|7|8|9]\d{9}$/;  // 手机号正则表达式
+    var regEmail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;  // 邮箱正则表达式
     var phone;
     var password;
 
@@ -133,7 +134,7 @@
     $("#phoneInput, #password").keyup(function () {
       phone = $('#phoneInput').val();
       password = $('#password').val();
-      if (phone && regPhone.test(phone) && password.length>=8 &&  password.length<= 20) {
+      if (phone && (regPhone.test(phone) || regEmail.test(phone)) && password.length>=8 &&  password.length<= 20) {
         $('.login').addClass('agLo');
       } else {
         $('.login').removeClass('agLo');
@@ -144,7 +145,7 @@
     $('#login').on('click', function () {
       phone = $('#phoneInput').val();
       password = $('#password').val();
-      if (phone && regPhone.test(phone) && password && (6 <= password.length <= 20)) {
+      if (phone && (regPhone.test(phone) || regEmail.test(phone)) && password && (6 <= password.length <= 20)) {
         params = encodeURI('{"password":"' + password + '","phone_number":"' + phone + '"}');
         $.ajax({
           url: 'http://api.xiaoyu.chat/live/Devicepassport/login?header={"os{"os":"web","reqtime":"1538122392411","sign":"","v"}&body=' + params,

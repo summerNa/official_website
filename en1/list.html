@@ -252,11 +252,11 @@
     $('#classify li').on('click', function () {
       is_all = 0;
       $(this).addClass('actived').siblings().removeClass('actived');
-      if ($(this).text() === '正常') {
+      if ($(this).text() === 'Available') {
         state = 'online';
-      } else if ($(this).text() === '异常') {
+      } else if ($(this).text() === 'Abnormal') {
         state = 'exception';
-      } else if ($(this).text() === '离线') {
+      } else if ($(this).text() === 'Off-line') {
         state = 'offline';
       } else {
         is_all = 1;
@@ -291,9 +291,9 @@
           if (data.header.retStatus !== 200) {
           } else {
             $('#barAll').text(data.body.device_info.sumary_data.device_count);
-            $('#barYest').text(data.body.device_info.sumary_data.avg_output.toFixed(2));
-            $('#barAvg').text(data.body.device_info.sumary_data.balance.toFixed(2));
-            $('#barAgree').text(data.body.device_info.sumary_data.yes_wkb.toFixed(2));
+            $('#barAvg').text(data.body.device_info.sumary_data.avg_output.toFixed(2));
+            $('#barYest').text(data.body.device_info.sumary_data.yes_wkb.toFixed(2));
+            $('#barAgree').text(data.body.device_info.sumary_data.balance.toFixed(2));
             var content = '';
             if (data.body.device_info.hasOwnProperty('device_list')) {
               arrList = data.body.device_info.device_list;
@@ -303,23 +303,29 @@
                 balance = Number(data.body.device_info.device_list[i].balance).toFixed(2);
                 if (data.body.device_info.device_list[i].status === 'offline') {
                   sta = 'Off-line';
+                  classname = 'grey status'
                 } else if (data.body.device_info.device_list[i].status === 'online') {
                   sta = 'Avaliable';
+                  classname = 'status';
                 } else {
                   sta = 'Abnormal';
+                  classname = 'red status'
                 }
                 if (!data.body.device_info.device_list[i].disk_info.length) {
                   used = 0;
                   all = 0;
                 } else {
-                  used = (Number(data.body.device_info.device_list[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed();
-                  all = (Number(data.body.device_info.device_list[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed();
+                  used = (Number(data.body.device_info.device_list[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed() + 'G';
+                  all = (Number(data.body.device_info.device_list[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed() + 'G';
                 }
                 day = ((Number(Date.parse(new Date()) / 1000) - Number(data.body.device_info.device_list[i].bind_time)) / 60 / 60 / 24).toFixed();
+
                 content += '<div class="pick"><div class="up"><p class="name">' + data.body.device_info.device_list[i].device_name
-                  + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>Balance：<span>' + balance + '</span></p><div class="right"><div><img src="../img/common/tongji.png">Statistics</div><div><img src="../img/common/caozuo.png">Operate</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
+                  + '<span class="status2">' + data.body.device_info.device_list[i].group_name
+                  + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>The day before yesterday：<span>' + before_day + '</span>Balance：<span>' + balance + '</span></p><div class="right"><div class="statistics" data-id="' + data.body.device_info.device_list[i].userid + '"><img src="../img/common/tongji.png">Statistics</div><div class="operate" data-id="' + data.body.device_info.device_list[i].userid + '"><img src="../img/common/caozuo.png">Operater</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
                   + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>Account:<span>' + data.body.device_info.device_list[i].wky_account + '</span></p><p>Activated Days:<span>' + day +
                   '</span></p></div><div class="line"><p>IP:<span>' + data.body.device_info.device_list[i].ip + '</span></p></div></div></div>';
+
               }
               $('.listCon').empty();
               $('.listCon').append(content);
@@ -446,25 +452,30 @@
         yes_wkb = Number(arrList[i].yes_wkb).toFixed(2);
         before_day = Number(arrList[i].before_day).toFixed(2);
         balance = Number(arrList[i].balance).toFixed(2);
-        if (data.body.device_info.device_list[i].status === 'offline') {
+        if (arrList[i].status === 'offline') {
           sta = 'Off-line';
-        } else if (data.body.device_info.device_list[i].status === 'online') {
+          classname = 'grey status'
+        } else if (arrList[i].status === 'online') {
           sta = 'Avaliable';
+          classname = 'status';
         } else {
           sta = 'Abnormal';
+          classname = 'red status'
         }
-        if (!data.body.device_info.device_list[i].disk_info.length) {
+        if (!arrList[i].disk_info.length) {
           used = 0;
           all = 0;
         } else {
-          used = (Number(data.body.device_info.device_list[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed();
-          all = (Number(data.body.device_info.device_list[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed();
+          used = (Number(arrList[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed() + 'G';
+          all = (Number(arrList[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed() + 'G';
         }
-        day = ((Number(Date.parse(new Date()) / 1000) - Number(data.body.device_info.device_list[i].bind_time)) / 60 / 60 / 24).toFixed();
-        content += '<div class="pick"><div class="up"><p class="name">' + data.body.device_info.device_list[i].device_name
-          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>Balance：<span>' + balance + '</span></p><div class="right"><div><img src="../img/common/tongji.png">Statistics</div><div><img src="../img/common/caozuo.png">Operate</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
-          + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>Account:<span>' + data.body.device_info.device_list[i].wky_account + '</span></p><p>Activated Days:<span>' + day +
-          '</span></p></div><div class="line"><p>IP:<span>' + data.body.device_info.device_list[i].ip + '</span></p></div></div></div>';
+        day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].bind_time)) / 60 / 60 / 24).toFixed();
+
+        content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
+          + '<span class="status2">' + arrList[i].group_name
+          + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>The day before yesterday：<span>' + before_day + '</span>Balance：<span>' + balance + '</span></p><div class="right"><div class="statistics" data-id="' + arrList[i].userid + '"><img src="../img/common/tongji.png">Statistics</div><div class="operate" data-id="' + arrList[i].userid + '"><img src="../img/common/caozuo.png">Operater</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + arrList[i].device_sn
+          + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>Account:<span>' + arrList[i].wky_account + '</span></p><p>Activated Days:<span>' + day +
+          '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
       }
       $('.listCon').empty();
       $('.listCon').append(content);
@@ -487,25 +498,30 @@
         yes_wkb = Number(arrList[i].yes_wkb).toFixed(2);
         before_day = Number(arrList[i].before_day).toFixed(2);
         balance = Number(arrList[i].balance).toFixed(2);
-        if (data.body.device_info.device_list[i].status === 'offline') {
+        if (arrList[i].status === 'offline') {
           sta = 'Off-line';
-        } else if (data.body.device_info.device_list[i].status === 'online') {
+          classname = 'grey status'
+        } else if (arrList[i].status === 'online') {
           sta = 'Avaliable';
+          classname = 'status';
         } else {
           sta = 'Abnormal';
+          classname = 'red status'
         }
-        if (!data.body.device_info.device_list[i].disk_info.length) {
+        if (!arrList[i].disk_info.length) {
           used = 0;
           all = 0;
         } else {
-          used = (Number(data.body.device_info.device_list[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed();
-          all = (Number(data.body.device_info.device_list[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed();
+          used = (Number(arrList[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed() + 'G';
+          all = (Number(arrList[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed() + 'G';
         }
-        day = ((Number(Date.parse(new Date()) / 1000) - Number(data.body.device_info.device_list[i].bind_time)) / 60 / 60 / 24).toFixed();
-        content += '<div class="pick"><div class="up"><p class="name">' + data.body.device_info.device_list[i].device_name
-          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>Balance：<span>' + balance + '</span></p><div class="right"><div><img src="../img/common/tongji.png">Statistics</div><div><img src="../img/common/caozuo.png">Operate</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
-          + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>Account:<span>' + data.body.device_info.device_list[i].wky_account + '</span></p><p>Activated Days:<span>' + day +
-          '</span></p></div><div class="line"><p>IP:<span>' + data.body.device_info.device_list[i].ip + '</span></p></div></div></div>';
+        day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].bind_time)) / 60 / 60 / 24).toFixed();
+
+        content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
+          + '<span class="status2">' + arrList[i].group_name
+          + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>The day before yesterday：<span>' + before_day + '</span>Balance：<span>' + balance + '</span></p><div class="right"><div class="statistics" data-id="' + arrList[i].userid + '"><img src="../img/common/tongji.png">Statistics</div><div class="operate" data-id="' + arrList[i].userid + '"><img src="../img/common/caozuo.png">Operater</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + arrList[i].device_sn
+          + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>Account:<span>' + arrList[i].wky_account + '</span></p><p>Activated Days:<span>' + day +
+          '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
       }
       $('.listCon').empty();
       $('.listCon').append(content);
@@ -529,25 +545,30 @@
         yes_wkb = Number(arrList[i].yes_wkb).toFixed(2);
         before_day = Number(arrList[i].before_day).toFixed(2);
         balance = Number(arrList[i].balance).toFixed(2);
-        if (data.body.device_info.device_list[i].status === 'offline') {
+        if (arrList[i].status === 'offline') {
           sta = 'Off-line';
-        } else if (data.body.device_info.device_list[i].status === 'online') {
+          classname = 'grey status'
+        } else if (arrList[i].status === 'online') {
           sta = 'Avaliable';
+          classname = 'status';
         } else {
           sta = 'Abnormal';
+          classname = 'red status'
         }
-        if (!data.body.device_info.device_list[i].disk_info.length) {
+        if (!arrList[i].disk_info.length) {
           used = 0;
           all = 0;
         } else {
-          used = (Number(data.body.device_info.device_list[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed();
-          all = (Number(data.body.device_info.device_list[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed();
+          used = (Number(arrList[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed() + 'G';
+          all = (Number(arrList[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed() + 'G';
         }
-        day = ((Number(Date.parse(new Date()) / 1000) - Number(data.body.device_info.device_list[i].bind_time)) / 60 / 60 / 24).toFixed();
-        content += '<div class="pick"><div class="up"><p class="name">' + data.body.device_info.device_list[i].device_name
-          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>Balance：<span>' + balance + '</span></p><div class="right"><div><img src="../img/common/tongji.png">Statistics</div><div><img src="../img/common/caozuo.png">Operate</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
-          + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>Account:<span>' + data.body.device_info.device_list[i].wky_account + '</span></p><p>Activated Days:<span>' + day +
-          '</span></p></div><div class="line"><p>IP:<span>' + data.body.device_info.device_list[i].ip + '</span></p></div></div></div>';
+        day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].bind_time)) / 60 / 60 / 24).toFixed();
+
+        content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
+          + '<span class="status2">' + arrList[i].group_name
+          + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>The day before yesterday：<span>' + before_day + '</span>Balance：<span>' + balance + '</span></p><div class="right"><div class="statistics" data-id="' + arrList[i].userid + '"><img src="../img/common/tongji.png">Statistics</div><div class="operate" data-id="' + arrList[i].userid + '"><img src="../img/common/caozuo.png">Operater</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + arrList[i].device_sn
+          + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>Account:<span>' + arrList[i].wky_account + '</span></p><p>Activated Days:<span>' + day +
+          '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
       }
       $('.listCon').empty();
       $('.listCon').append(content);
@@ -570,25 +591,30 @@
         yes_wkb = Number(arrList[i].yes_wkb).toFixed(2);
         before_day = Number(arrList[i].before_day).toFixed(2);
         balance = Number(arrList[i].balance).toFixed(2);
-        if (data.body.device_info.device_list[i].status === 'offline') {
+        if (arrList[i].status === 'offline') {
           sta = 'Off-line';
-        } else if (data.body.device_info.device_list[i].status === 'online') {
+          classname = 'grey status'
+        } else if (arrList[i].status === 'online') {
           sta = 'Avaliable';
+          classname = 'status';
         } else {
           sta = 'Abnormal';
+          classname = 'red status'
         }
-        if (!data.body.device_info.device_list[i].disk_info.length) {
+        if (!arrList[i].disk_info.length) {
           used = 0;
           all = 0;
         } else {
-          used = (Number(data.body.device_info.device_list[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed();
-          all = (Number(data.body.device_info.device_list[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed();
+          used = (Number(arrList[i].disk_info[0].used) / 1024 / 1024 / 1024).toFixed() + 'G';
+          all = (Number(arrList[i].disk_info[0].capacity) / 1024 / 1024 / 1024).toFixed() + 'G';
         }
-        day = ((Number(Date.parse(new Date()) / 1000) - Number(data.body.device_info.device_list[i].bind_time)) / 60 / 60 / 24).toFixed();
-        content += '<div class="pick"><div class="up"><p class="name">' + data.body.device_info.device_list[i].device_name
-          + '<span class="status">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>Balance：<span>' + balance + '</span></p><div class="right"><div><img src="../img/common/tongji.png">Statistics</div><div><img src="../img/common/caozuo.png">Operate</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
-          + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>Account:<span>' + data.body.device_info.device_list[i].wky_account + '</span></p><p>Activated Days:<span>' + day +
-          '</span></p></div><div class="line"><p>IP:<span>' + data.body.device_info.device_list[i].ip + '</span></p></div></div></div>';
+        day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].bind_time)) / 60 / 60 / 24).toFixed();
+
+        content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
+          + '<span class="status2">' + arrList[i].group_name
+          + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>The day before yesterday：<span>' + before_day + '</span>Balance：<span>' + balance + '</span></p><div class="right"><div class="statistics" data-id="' + arrList[i].userid + '"><img src="../img/common/tongji.png">Statistics</div><div class="operate" data-id="' + arrList[i].userid + '"><img src="../img/common/caozuo.png">Operater</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + arrList[i].device_sn
+          + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>Account:<span>' + arrList[i].wky_account + '</span></p><p>Activated Days:<span>' + day +
+          '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
       }
       $('.listCon').empty();
       $('.listCon').append(content);

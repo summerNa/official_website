@@ -73,7 +73,7 @@
               </ul>
             </div>
             <input type="text" class="phone" placeholder="手机号" id="phoneInput" autocomplete="off"/> -->
-            <input type="text" class="pass" placeholder="Phone Number" id="phoneInput" autocomplete="off"/>
+            <input type="text" class="pass" placeholder="Phone Number or Email" id="phoneInput" autocomplete="off"/>
           </div>
           <div class="input_box sm">
             <input type="text" placeholder="PIN" class="code" id="code" autocomplete="off"/>
@@ -106,6 +106,7 @@
 <script>
   $(document).ready(function () {
     var regPhone = /^1[3|4|5|7|8|9]\d{9}$/;  // 手机号正则表达式
+    var regEmail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;  // 邮箱正则表达式
     var phone;
     var password;
     var verify_code;
@@ -143,7 +144,7 @@
       password = $('#password').val();
       verify_code = $('#code').val();
       // checked = $('#isAgree').is(':checked');
-      if (phone && regPhone.test(phone) && password.length >=8 && password.length <= 20 && verify_code.length === 6) {
+      if (phone && (regPhone.test(phone) || regEmail.test(phone)) && password.length >=8 && password.length <= 20 && verify_code.length === 6) {
         $('#register').addClass('actived');
       } else {
         $('#register').removeClass('actived');
@@ -166,7 +167,7 @@
     // 发送验证码
     $('#sendCode').on('click', function () {
       phone = $('#phoneInput').val();
-      if (phone && regPhone.test(phone)) {
+      if (phone && (regPhone.test(phone) || regEmail.test(phone))) {
         params = encodeURI('{"opt_type":"forget_pwd","phone_number":"' + phone + '"}');
         if (flag) {
           flag = false;
@@ -215,7 +216,7 @@
       password = $('#password').val();
       verify_code = $('#code').val();
       // checked = $('#isAgree').is(':checked');
-      if (phone && regPhone.test(phone) && password && (6 <= password.length <= 20) && verify_code.length > 0) {
+      if (phone && (regPhone.test(phone) || regEmail.test(phone)) && password && (6 <= password.length <= 20) && verify_code.length > 0) {
         params = encodeURI('{"new_password":"' + password + '","phone_number":"' + phone + '","verify_code":"' + verify_code + '"}');
         $.ajax({
           url: 'http://api.xiaoyu.chat/live/Devicepassport/forgetPassword?header={"os{"os":"web","reqtime":"1538122392411","sign":"","v"}&body=' + params,
