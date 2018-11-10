@@ -723,7 +723,7 @@
     $('.cd_pop').on('click', function () {
       params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","device_userid":"' + userid + '"}');
       $.ajax({
-        url: '/api/live/Devicemanager/unmountUsb?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+        url: 'http://api.xiaoyu.chat/live/Devicemanager/unmountUsb?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
         type: 'GET',
         dataType: 'JSON',
         beforeSend: function (request) {
@@ -759,7 +759,7 @@
     $('.restart_device').on('click', function () {
       params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","device_userid":"' + userid + '"}');
       $.ajax({
-        url: '/api/live/Devicemanager/rebootDevice?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+        url: 'http://api.xiaoyu.chat/live/Devicemanager/rebootDevice?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
         type: 'GET',
         dataType: 'JSON',
         beforeSend: function (request) {
@@ -794,7 +794,7 @@
     $('.delete_device').on('click', function () {
       params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","device_userid":"' + userid + '"}');
       $.ajax({
-        url: '/api/live/Devicemanager/removeDevice?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+        url: 'http://api.xiaoyu.chat/live/Devicemanager/removeDevice?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
         type: 'GET',
         dataType: 'JSON',
         beforeSend: function (request) {
@@ -831,7 +831,7 @@
     $('.picks').on('click', function () {
       params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","device_userid":"' + userid + '"}');
       $.ajax({
-        url: '/api/live/Devicemanager/drawCoin?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+        url: 'http://api.xiaoyu.chat/live/Devicemanager/drawCoin?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
         type: 'GET',
         dataType: 'JSON',
         beforeSend: function (request) {
@@ -887,7 +887,7 @@
       if ($('.inputr').val()) {
         params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","device_userid":"' + userid + '","device_name":"' + $('.inputr').val() + '"}');
         $.ajax({
-          url: '/api/live/Devicemanager/renameDevice?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+          url: 'http://api.xiaoyu.chat/live/Devicemanager/renameDevice?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
           type: 'GET',
           dataType: 'JSON',
           beforeSend: function (request) {
@@ -937,7 +937,7 @@
       if (newId) {
         params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","device_userid":"' + userid + '","new_group_id":"' + newId + '","old_group_id":"' + groupid + '","new_group_name":"' + newname + '"}');
         $.ajax({
-          url: '/api/live/Devicemanager/setDeviceGroup?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+          url: 'http://api.xiaoyu.chat/live/Devicemanager/setDeviceGroup?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
           type: 'GET',
           dataType: 'JSON',
           beforeSend: function (request) {

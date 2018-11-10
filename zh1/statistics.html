@@ -146,7 +146,7 @@
 
     params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","device_userid":"' + userid + '"}');
     $.ajax({
-      url: '/api/live/Devicemanager/getTheDeviceOutputTrend?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+      url: 'http://api.xiaoyu.chat/live/Devicemanager/getTheDeviceOutputTrend?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
       type: 'GET',
       dataType: 'JSON',
       beforeSend: function (request) {
@@ -185,7 +185,7 @@
 
     params2 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","device_userid":"' + userid + '"}');
     $.ajax({
-      url: '/api/live/Devicemanager/getDrawalHistory?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params2,
+      url: 'http://api.xiaoyu.chat/live/Devicemanager/getDrawalHistory?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params2,
       type: 'GET',
       dataType: 'JSON',
       beforeSend: function (request) {
@@ -211,7 +211,7 @@
 
     params3 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","device_userid":"' + userid + '"}');
     $.ajax({
-      url: '/api/live/Devicemanager/getIncomeHistory?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params3,
+      url: 'http://api.xiaoyu.chat/live/Devicemanager/getIncomeHistory?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params3,
       type: 'GET',
       dataType: 'JSON',
       beforeSend: function (request) {
