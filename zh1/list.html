@@ -170,7 +170,7 @@
   <div class="modal">
     <div class="modal-body">
       <ul class="select">
-        <li class="se pick">提取链克</li>
+        <li class="se picks">提取链克</li>
         <li class="se changeName">设备改名</li>
         <li class="se changeGroup">设备分组</li>
         <li class="cd_pop">弹出磁盘</li>
@@ -182,12 +182,19 @@
         <div class="inputArea">
           <input class="inputr" type="text" placeholder="请输入新的名称">
         </div>
-
         <div class="btn-group">
-          <button class="reset">取消</button>
-          <button class="sure">确定</button>
+          <button class="reset reset">取消</button>
+          <button class="sure sure">确定</button>
         </div>
-
+      </div>
+      <div class="groupBox none">
+        <p>选择分组</p>
+        <ul class="selectArea">
+        </ul>
+        <div class="btn-group">
+          <button class="selectReset">取消</button>
+          <button class="selectSure">确定</button>
+        </div>
       </div>
     </div>
   </div>
@@ -260,10 +267,13 @@
         if (data.header.retStatus !== 200) {
         } else {
           var groups = '';
+          var selectGroups = '';
           for (var i = 0; i < data.body.group_list.length; i++) {
-            groups += '<p class="gr" id="' + data.body.group_list[i].group_id + '">' + data.body.group_list[i].group_name + '</p>'
+            groups += '<p class="gr" id="' + data.body.group_list[i].group_id + '">' + data.body.group_list[i].group_name + '</p>';
+            selectGroups += '<li><p>' + data.body.group_list[i].group_name + '</p><input data-groupname="' + data.body.group_list[i].group_name + '" name="select" type="radio" value="' + data.body.group_list[i].group_id + '"></li>';
           }
           $('#group').append(groups);
+          $('.selectArea').append(selectGroups);
         }
       },
       error: function (error) {
@@ -355,7 +365,8 @@
                 day = ((Number(Date.parse(new Date()) / 1000) - Number(data.body.device_info.device_list[i].features.onecloud_coin)) / 3600 / 24).toFixed();
                 content += '<div class="pick"><div class="up"><p class="name">' + data.body.device_info.device_list[i].device_name
                   + '<span class="status2">' + data.body.device_info.device_list[i].group_name
-                  + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div class="statistics" data-id="' + data.body.device_info.device_list[i].userid + '"><img src="../img/common/tongji.png">统计</div><div class="operate" data-id="' + data.body.device_info.device_list[i].userid + '"><img src="../img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
+                  + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance
+                  + '</span></p><div class="right"><div class="statistics" data-username="' + data.body.device_info.device_list[i].device_name + '" data-id="' + data.body.device_info.device_list[i].userid + '"><img src="../img/common/tongji.png">统计</div><div class="operate" data-groupid="' + data.body.device_info.device_list[i].group_id + '" data-id="' + data.body.device_info.device_list[i].userid + '"><img src="../img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
                   + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>账号:<span>' + data.body.device_info.device_list[i].wky_account + '</span></p><p>激活天数:<span>' + day +
                   '</span></p></div><div class="line"><p>IP:<span>' + data.body.device_info.device_list[i].ip + '</span></p></div></div></div>';
               }
@@ -531,7 +542,8 @@
         day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].features.onecloud_coin)) / 3600 / 24).toFixed();
         content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
           + '<span class="status2">' + arrList[i].group_name
-          + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div class="statistics" data-id="' + arrList[i].userid + '"><img src="../img/common/tongji.png">统计</div><div class="operate" data-id="' + arrList[i].userid + '"><img src="../img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + arrList[i].device_sn
+          + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance
+          + '</span></p><div class="right"><div class="statistics" data-username="' + arrList[i].device_name + '" data-id="' + arrList[i].userid + '"><img src="../img/common/tongji.png">统计</div><div class="operate" data-groupid="' + arrList[i].group_id + '" data-id="' + arrList[i].userid + '"><img src="../img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + arrList[i].device_sn
           + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>账号:<span>' + arrList[i].wky_account + '</span></p><p>激活天数:<span>' + day +
           '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
       }
@@ -576,7 +588,8 @@
         day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].features.onecloud_coin)) / 3600 / 24).toFixed();
         content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
           + '<span class="status2">' + arrList[i].group_name
-          + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div class="statistics" data-id="' + arrList[i].userid + '"><img src="../img/common/tongji.png">统计</div><div class="operate" data-id="' + arrList[i].userid + '"><img src="../img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + arrList[i].device_sn
+          + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance
+          + '</span></p><div class="right"><div class="statistics" data-username="' + arrList[i].device_name + '" data-id="' + arrList[i].userid + '"><img src="../img/common/tongji.png">统计</div><div class="operate" data-groupid="' + arrList[i].group_id + '" data-id="' + arrList[i].userid + '"><img src="../img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + arrList[i].device_sn
           + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>账号:<span>' + arrList[i].wky_account + '</span></p><p>激活天数:<span>' + day +
           '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
       }
@@ -622,7 +635,8 @@
         day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].features.onecloud_coin)) / 3600 / 24).toFixed();
         content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
           + '<span class="status2">' + arrList[i].group_name
-          + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div class="statistics" data-id="' + arrList[i].userid + '"><img src="../img/common/tongji.png">统计</div><div class="operate" data-id="' + arrList[i].userid + '"><img src="../img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + arrList[i].device_sn
+          + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance
+          + '</span></p><div class="right"><div class="statistics" data-username="' + arrList[i].device_name + '" data-id="' + arrList[i].userid + '"><img src="../img/common/tongji.png">统计</div><div class="operate" data-groupid="' + arrList[i].group_id + '" data-id="' + arrList[i].userid + '"><img src="../img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + arrList[i].device_sn
           + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>账号:<span>' + arrList[i].wky_account + '</span></p><p>激活天数:<span>' + day +
           '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
       }
@@ -667,7 +681,8 @@
         day = ((Number(Date.parse(new Date()) / 1000) - Number(arrList[i].features.onecloud_coin)) / 3600 / 24).toFixed();
         content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
           + '<span class="status2">' + arrList[i].group_name
-          + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance + '</span></p><div class="right"><div class="statistics" data-id="' + arrList[i].userid + '"><img src="../img/common/tongji.png">统计</div><div class="operate" data-id="' + arrList[i].userid + '"><img src="../img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + arrList[i].device_sn
+          + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">昨天：<span>' + yes_wkb + '</span>前天：<span>' + before_day + '</span>余额：<span>' + balance
+          + '</span></p><div class="right"><div class="statistics" data-username="' + arrList[i].device_name + '" data-id="' + arrList[i].userid + '"><img src="../img/common/tongji.png">统计</div><div class="operate" data-groupid="' + arrList[i].group_id + '" data-id="' + arrList[i].userid + '"><img src="../img/common/caozuo.png">操作</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + arrList[i].device_sn
           + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>账号:<span>' + arrList[i].wky_account + '</span></p><p>激活天数:<span>' + day +
           '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
       }
@@ -691,13 +706,11 @@
       window.open("import.html");
     });
 
-    $('.statistics').on('click', function () {
-      alert(111)
-    })
-
     // 操作
     $(".listCon").on("click", ".operate", function (e) {
       userid = $(this).attr('data-id');
+      groupid = $(this).attr('data-groupid');
+      groupname = $(this).attr('data-groupname');
       $('.modal').addClass('show');
       e.stopPropagation();
     });
@@ -705,7 +718,8 @@
     // 统计
     $(".listCon").on("click", ".statistics", function (e) {
       userid = $(this).attr('data-id');
-      window.location.href = 'statistics.html?userid='+userid;
+      username = $(this).attr('data-username');
+      window.location.href = 'statistics.html?userid=' + userid +'&username='+username;
       e.stopPropagation();
     });
 
@@ -800,6 +814,8 @@
               animationDuration: 300
             });
           } else {
+            params2 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":1}');
+            getList();
             bootoast({
               type: 'success',
               message: '删除成功！',
@@ -816,7 +832,7 @@
     });
 
     // 提取链克
-    $('.pick').on('click', function () {
+    $('.picks').on('click', function () {
       params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","device_userid":"' + userid + '"}');
       $.ajax({
         url: '/api/live/Devicemanager/drawCoin?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
@@ -854,7 +870,15 @@
     $('.changeName').on('click', function () {
       $('.select').addClass('none');
       $('.inputName').removeClass('none');
+
     });
+
+    // 提取链克
+    $('.changeGroup').on('click', function () {
+      $('.select').addClass('none');
+      $('.groupBox').removeClass('none');
+    });
+
 
     // 确定
     $('.sure').on('click', function () {
@@ -879,6 +903,8 @@
                 animationDuration: 300
               });
             } else {
+              params2 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":1}');
+              getList();
             }
           },
           error: function (error) {
@@ -901,6 +927,71 @@
       $('.inputName').addClass('none');
       $('.select').removeClass('none');
     });
+
+    // 分组确定
+    $('.selectSure').on('click', function () {
+      newId = $("input[type='radio']:checked").val();
+      newname = $("input[type='radio']:checked").attr('data-groupname');
+      if (newId) {
+        params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","device_userid":"' + userid + '","new_group_id":"' + newId + '","old_group_id":"' + groupid + '","new_group_name":"' + newname + '"}');
+        $.ajax({
+          url: '/api/live/Devicemanager/setDeviceGroup?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+          type: 'GET',
+          dataType: 'JSON',
+          beforeSend: function (request) {
+          },
+          success: function (data) {
+            $('.modal').removeClass('show');
+            $('.inputName').addClass('none');
+            $('.select').removeClass('none');
+            $('.groupBox').addClass('none');
+            if (data.header.retStatus !== 200) {
+              bootoast({
+                type: 'success',
+                message: data.header.retMessage,
+                position: 'top-center',
+                timeout: true,
+                animationDuration: 300
+              });
+            } else {
+              params2 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":1}');
+              getList();
+            }
+          },
+          error: function (error) {
+            console.log('error');
+            $('.modal').removeClass('show');
+            $('.inputName').addClass('none');
+            $('.select').removeClass('none');
+            $('.groupBox').addClass('none');
+          }
+        });
+      } else {
+        $('.modal').removeClass('show');
+        $('.inputName').addClass('none');
+        $('.select').removeClass('none');
+        $('.groupBox').addClass('none');
+      }
+    });
+
+    // 取消
+    $('.selectReset').on('click', function () {
+      $('.modal').removeClass('show');
+      $('.inputName').addClass('none');
+      $('.select').removeClass('none');
+      $('.groupBox').addClass('none');
+    });
+
+    $('.modal').on('click', function () {
+      $('.modal').removeClass('show');
+      $('.inputName').addClass('none');
+      $('.select').removeClass('none');
+      $('.groupBox').addClass('none');
+    })
+
+    $('.modal-body').on('click', function (e) {
+      e.stopPropagation();
+    })
 
   })
 

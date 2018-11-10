@@ -1,6 +1,6 @@
 body {
   background: #ebebeb;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
 }
 .content_wrap {}
 .content_wrap .content {
@@ -49,9 +49,13 @@ body {
 .content_wrap .content .btnWrap2 p {
   font-size: 0.22rem;
   margin-right: 1rem;
+  cursor: pointer;
+}
+.content_wrap .content .btnWrap2 p.actived {
+  color: #218bff;
 }
 .content_wrap .content .tableBox {
-  height: 300px;
+  height: 500px;
   overflow-y: auto;
   margin-top: 0.6rem;
 } 

@@ -73,10 +73,10 @@
               </ul>
             </div>
             <input type="text" class="phone" placeholder="手机号" id="phoneInput" autocomplete="off"/> -->
-            <input type="text" class="pass" placeholder="手机号或邮箱" id="phoneInput" autocomplete="off"/>
+            <input type="text" class="pass" placeholder="手机号或邮箱" id="phoneInput" autocomplete="off" />
           </div>
           <div class="input_box sm">
-            <input type="text" placeholder="验证码" class="code" id="code" autocomplete="off"/>
+            <input type="text" placeholder="验证码" class="code" id="code" autocomplete="off" />
             <a href="javascript:;" class="send" id="sendCode">发送验证码</a>
           </div>
           <div class="input_box">
@@ -144,7 +144,7 @@
       password = $('#password').val();
       verify_code = $('#code').val();
       // checked = $('#isAgree').is(':checked');
-      if (phone && (regPhone.test(phone) || regEmail.test(phone)) && password.length >=8 && password.length <= 20 && verify_code.length === 6) {
+      if (phone && (regPhone.test(phone) || regEmail.test(phone)) && password.length >= 8 && password.length <= 20 && verify_code.length === 6) {
         $('#register').addClass('actived');
       } else {
         $('#register').removeClass('actived');
@@ -159,7 +159,7 @@
       $('.tips').removeClass('actived');
     });
 
-    $("input[type='checkbox']").on('click',function(){
+    $("input[type='checkbox']").on('click', function () {
       isParamsRight();
     });
 
@@ -168,7 +168,12 @@
     $('#sendCode').on('click', function () {
       phone = $('#phoneInput').val();
       if (phone && (regPhone.test(phone) || regEmail.test(phone))) {
-        params = encodeURI('{"opt_type":"forget_pwd","phone_number":"' + phone + '"}');
+        if ((regPhone.test(phone))) {
+          type = 'phone';
+        } else {
+          type = 'mail';
+        }
+        params = encodeURI('{"opt_type":"forget_pwd","phone_number":"' + phone + '","type":"'+ type +'"}');
         if (flag) {
           flag = false;
           $.ajax({
@@ -178,15 +183,15 @@
             beforeSend: function (request) {
             },
             success: function (data) {
-              if(data.header.retStatus !== 200) {
+              if (data.header.retStatus !== 200) {
                 $('.tips').addClass('actived');
                 $('.tips').html(data.header.retMessage);
               } else {
                 $('.send').addClass('sendGrey');
                 var t = 60;
                 $('.send').text(t);
-                timer = setInterval(function() {
-                  if (t>1) {
+                timer = setInterval(function () {
+                  if (t > 1) {
                     t--;
                     $('.send').text(t);
                   } else {
@@ -203,7 +208,7 @@
             }
           });
         }
-        
+
       } else {
         $('.tips').addClass('actived');
         $('.tips').html('请输入有效的手机号码');
@@ -225,10 +230,10 @@
           beforeSend: function (request) {
           },
           success: function (data) {
-            if(data.header.retStatus !== 200) {
+            if (data.header.retStatus !== 200) {
               $('.tips').addClass('actived');
               $('.tips').html(data.header.retMessage);
-            }else {
+            } else {
               $(location).attr('href', 'login.html');
             }
           },

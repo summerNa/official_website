@@ -167,8 +167,12 @@
     // 发送验证码
     $('#sendCode').on('click', function () {
       phone = $('#phoneInput').val();
-      if (phone && (regPhone.test(phone) || regEmail.test(phone))) {
-        params = encodeURI('{"opt_type":"forget_pwd","phone_number":"' + phone + '"}');
+      if (phone && (regPhone.test(phone) || regEmail.test(phone))) {if ((regPhone.test(phone))) {
+          type = 'phone';
+        } else {
+          type = 'mail';
+        }
+        params = encodeURI('{"opt_type":"forget_pwd","phone_number":"' + phone + '","type":"'+type+'"}');
         if (flag) {
           flag = false;
           $.ajax({
@@ -180,7 +184,12 @@
             success: function (data) {
               if(data.header.retStatus !== 200) {
                 $('.tips').addClass('actived');
-                $('.tips').html(data.header.retMessage);
+                if (data.header.retMessage === '满60秒才能重新获取验证码') {
+                  $('.tips').html('60 seconds to regain the verification code');
+                } else {
+                  $('.tips').html(data.header.retMessage);
+                }
+                
               } else {
                 $('.send').addClass('sendGrey');
                 var t = 60;

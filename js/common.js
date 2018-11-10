@@ -1,13 +1,13 @@
 var isLoginS = localStorage.getItem("vrbig");
 if (isLoginS) {
   isLogin = JSON.parse(localStorage.getItem("vrbig"));
-  if(Object.keys(isLogin).length) {
+  if (Object.keys(isLogin).length) {
     $('.usernameAndLogin').attr('href', 'javascript:;');
     $('.usernameAndLogin').html(isLogin.phone.substr(0, 3) + '****' + isLogin.phone.substr(7));
     $('.logoutAndRegister').html('退出');
     $('.logoutAndRegister').attr('href', 'javascript:;');
   }
-  $('.logoutAndRegister').on('click', function() {
+  $('.logoutAndRegister').on('click', function () {
     if (Object.keys(isLogin).length) {
       // 登出
       localStorage.setItem("vrbig", "");
@@ -16,7 +16,7 @@ if (isLoginS) {
   });
 }
 
-$('.click_im_area').on('click', function() {
+$('.click_im_area').on('click', function () {
   if (isLoginS) {
     $(location).attr('href', 'import.html');  // 跳转到首页
   } else {
@@ -24,11 +24,11 @@ $('.click_im_area').on('click', function() {
   }
 });
 
-$('.header_wrap .header .list').on('click', function() {
+$('.header_wrap .header .list').on('click', function () {
   if (isLoginS) {
-    $(location).attr('href', 'list.html');  // 跳转到首页
+    $(location).attr('href', 'list.html');  // 
   } else {
-    $(location).attr('href', 'login.html');  // 跳转到首页
+    $(location).attr('href', 'login.html?from=list');  // 跳转到首页
   }
 });
 

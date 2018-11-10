@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/list.css">
+  <link rel="stylesheet" type="text/css" href="../css/bootoast.css">
   <title>Xiaoyu's Mine Field</title>
 </head>
 
@@ -167,10 +168,43 @@
     </div>
   </div>
   </div>
+  <!-- modal -->
+  <div class="modal">
+    <div class="modal-body">
+      <ul class="select">
+        <li class="se picks">Get LianKe</li>
+        <li class="se changeName">Change device name</li>
+        <li class="se changeGroup">Group setting</li>
+        <li class="cd_pop">Pop-up disk</li>
+        <li class="restart_device">Restart device</li>
+        <li class="delete_device">Delete device</li>
+      </ul>
+      <div class="inputName none">
+        <p>Change device name</p>
+        <div class="inputArea">
+          <input class="inputr" type="text" placeholder="Please enter your new device name">
+        </div>
+        <div class="btn-group">
+          <button class="reset reset">Cancel</button>
+          <button class="sure sure">Confirm</button>
+        </div>
+      </div>
+      <div class="groupBox none">
+        <p>Select Group</p>
+        <ul class="selectArea">
+        </ul>
+        <div class="btn-group">
+          <button class="selectReset">Cancel</button>
+          <button class="selectSure">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 <script src="../js/jquery-1.9.1.min.js"></script>
 <script src="js/common.js"></script>
 <script src="../js/pinyin2.js"></script>
+<script type="text/javascript" src="../js/bootoast.js"></script>
 <script>
   $(document).ready(function () {
 
@@ -322,7 +356,8 @@
 
                 content += '<div class="pick"><div class="up"><p class="name">' + data.body.device_info.device_list[i].device_name
                   + '<span class="status2">' + data.body.device_info.device_list[i].group_name
-                  + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>The day before yesterday：<span>' + before_day + '</span>Balance：<span>' + balance + '</span></p><div class="right"><div class="statistics" data-id="' + data.body.device_info.device_list[i].userid + '"><img src="../img/common/tongji.png">Statistics</div><div class="operate" data-id="' + data.body.device_info.device_list[i].userid + '"><img src="../img/common/caozuo.png">Operater</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
+                  + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>The day before yesterday：<span>' + before_day + '</span>Balance：<span>' + balance
+                  + '</span></p><div class="right"><div class="statistics" data-username="' + data.body.device_info.device_list[i].device_name + '" data-id="' + data.body.device_info.device_list[i].userid + '"><img src="../img/common/tongji.png">Statistics</div><div class="operate" data-groupid="' + data.body.device_info.device_list[i].group_id + '" data-id="' + data.body.device_info.device_list[i].userid + '"><img src="../img/common/caozuo.png">Operater</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + data.body.device_info.device_list[i].device_sn
                   + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>Account:<span>' + data.body.device_info.device_list[i].wky_account + '</span></p><p>Activated Days:<span>' + day +
                   '</span></p></div><div class="line"><p>IP:<span>' + data.body.device_info.device_list[i].ip + '</span></p></div></div></div>';
 
@@ -352,9 +387,26 @@
         },
         success: function (data) {
           if (data.header.retStatus !== 200) {
-            alert(data.header.retMessage);
+            if (data.header.retMessage === '只有工作日的10:00-18:00允许提取') {
+              alermessage = 'Only working day 10:00-18:00 allows extraction';
+            } else {
+              alermessage = data.header.retMessage;
+            }
+            bootoast({
+              type: 'success',
+              message: alermessage,
+              position: 'top-center',
+              timeout: true,
+              animationDuration: 300
+            });
           } else {
-            alert('提币成功！');
+            bootoast({
+              type: 'success',
+              message: 'success',
+              position: 'top-center',
+              timeout: true,
+              animationDuration: 300
+            });
           }
         },
         error: function (error) {
@@ -375,7 +427,13 @@
         success: function (data) {
           if (data.header.retStatus !== 200) {
           } else {
-            alert('刷新成功！')
+            bootoast({
+              type: 'success',
+              message: 'success',
+              position: 'top-center',
+              timeout: true,
+              animationDuration: 300
+            });
           }
         },
         error: function (error) {
@@ -473,9 +531,11 @@
 
         content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
           + '<span class="status2">' + arrList[i].group_name
-          + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>The day before yesterday：<span>' + before_day + '</span>Balance：<span>' + balance + '</span></p><div class="right"><div class="statistics" data-id="' + arrList[i].userid + '"><img src="../img/common/tongji.png">Statistics</div><div class="operate" data-id="' + arrList[i].userid + '"><img src="../img/common/caozuo.png">Operater</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + arrList[i].device_sn
+          + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>The day before yesterday：<span>' + before_day + '</span>Balance：<span>' + balance
+          + '</span></p><div class="right"><div class="statistics" data-username="' + arrList[i].device_name + '" data-id="' + arrList[i].userid + '"><img src="../img/common/tongji.png">Statistics</div><div class="operate" data-groupid="' + arrList[i].group_id + '" data-id="' + arrList[i].userid + '"><img src="../img/common/caozuo.png">Operater</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + arrList[i].device_sn
           + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>Account:<span>' + arrList[i].wky_account + '</span></p><p>Activated Days:<span>' + day +
           '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
+
       }
       $('.listCon').empty();
       $('.listCon').append(content);
@@ -519,9 +579,11 @@
 
         content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
           + '<span class="status2">' + arrList[i].group_name
-          + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>The day before yesterday：<span>' + before_day + '</span>Balance：<span>' + balance + '</span></p><div class="right"><div class="statistics" data-id="' + arrList[i].userid + '"><img src="../img/common/tongji.png">Statistics</div><div class="operate" data-id="' + arrList[i].userid + '"><img src="../img/common/caozuo.png">Operater</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + arrList[i].device_sn
+          + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>The day before yesterday：<span>' + before_day + '</span>Balance：<span>' + balance
+          + '</span></p><div class="right"><div class="statistics" data-username="' + arrList[i].device_name + '" data-id="' + arrList[i].userid + '"><img src="../img/common/tongji.png">Statistics</div><div class="operate" data-groupid="' + arrList[i].group_id + '" data-id="' + arrList[i].userid + '"><img src="../img/common/caozuo.png">Operater</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + arrList[i].device_sn
           + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>Account:<span>' + arrList[i].wky_account + '</span></p><p>Activated Days:<span>' + day +
           '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
+
       }
       $('.listCon').empty();
       $('.listCon').append(content);
@@ -566,9 +628,11 @@
 
         content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
           + '<span class="status2">' + arrList[i].group_name
-          + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>The day before yesterday：<span>' + before_day + '</span>Balance：<span>' + balance + '</span></p><div class="right"><div class="statistics" data-id="' + arrList[i].userid + '"><img src="../img/common/tongji.png">Statistics</div><div class="operate" data-id="' + arrList[i].userid + '"><img src="../img/common/caozuo.png">Operater</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + arrList[i].device_sn
+          + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>The day before yesterday：<span>' + before_day + '</span>Balance：<span>' + balance
+          + '</span></p><div class="right"><div class="statistics" data-username="' + arrList[i].device_name + '" data-id="' + arrList[i].userid + '"><img src="../img/common/tongji.png">Statistics</div><div class="operate" data-groupid="' + arrList[i].group_id + '" data-id="' + arrList[i].userid + '"><img src="../img/common/caozuo.png">Operater</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + arrList[i].device_sn
           + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>Account:<span>' + arrList[i].wky_account + '</span></p><p>Activated Days:<span>' + day +
           '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
+
       }
       $('.listCon').empty();
       $('.listCon').append(content);
@@ -612,9 +676,11 @@
 
         content += '<div class="pick"><div class="up"><p class="name">' + arrList[i].device_name
           + '<span class="status2">' + arrList[i].group_name
-          + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>The day before yesterday：<span>' + before_day + '</span>Balance：<span>' + balance + '</span></p><div class="right"><div class="statistics" data-id="' + arrList[i].userid + '"><img src="../img/common/tongji.png">Statistics</div><div class="operate" data-id="' + arrList[i].userid + '"><img src="../img/common/caozuo.png">Operater</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + arrList[i].device_sn
+          + '<span class="' + classname + '">' + sta + '</span></p><div class="money"><p class="left">Yesterday：<span>' + yes_wkb + '</span>The day before yesterday：<span>' + before_day + '</span>Balance：<span>' + balance
+          + '</span></p><div class="right"><div class="statistics" data-username="' + arrList[i].device_name + '" data-id="' + arrList[i].userid + '"><img src="../img/common/tongji.png">Statistics</div><div class="operate" data-groupid="' + arrList[i].group_id + '" data-id="' + arrList[i].userid + '"><img src="../img/common/caozuo.png">Operater</div></div></div></div><div class="down none"><div class="line"><p>SN:<span>' + arrList[i].device_sn
           + '</span></p><p>' + used + '/' + all + '</p></div><div class="line"><p>Account:<span>' + arrList[i].wky_account + '</span></p><p>Activated Days:<span>' + day +
           '</span></p></div><div class="line"><p>IP:<span>' + arrList[i].ip + '</span></p></div></div></div>';
+
       }
       $('.listCon').empty();
       $('.listCon').append(content);
@@ -635,6 +701,300 @@
     $('.addDevice').on('click', function () {
       window.open("import.html");
     });
+
+    // 操作
+    $(".listCon").on("click", ".operate", function (e) {
+      userid = $(this).attr('data-id');
+      groupid = $(this).attr('data-groupid');
+      groupname = $(this).attr('data-groupname');
+      $('.modal').addClass('show');
+      e.stopPropagation();
+    });
+
+    // 统计
+    $(".listCon").on("click", ".statistics", function (e) {
+      userid = $(this).attr('data-id');
+      username = $(this).attr('data-username');
+      window.location.href = 'statistics.html?userid=' + userid +'&username='+username;
+      e.stopPropagation();
+    });
+
+    // 磁盘弹出
+    $('.cd_pop').on('click', function () {
+      params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","device_userid":"' + userid + '"}');
+      $.ajax({
+        url: '/api/live/Devicemanager/unmountUsb?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+        type: 'GET',
+        dataType: 'JSON',
+        beforeSend: function (request) {
+        },
+        success: function (data) {
+          $('.modal').removeClass('show');
+          if (data.header.retStatus !== 200) {
+            bootoast({
+              type: 'success',
+              message: data.header.retMessage,
+              position: 'top-center',
+              timeout: true,
+              animationDuration: 300
+            });
+          } else {
+            bootoast({
+              type: 'success',
+              message: 'success！',
+              position: 'top-center',
+              timeout: true,
+              animationDuration: 300
+            });
+
+          }
+        },
+        error: function (error) {
+          console.log('error');
+        }
+      });
+    });
+
+    // 重启设备
+    $('.restart_device').on('click', function () {
+      params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","device_userid":"' + userid + '"}');
+      $.ajax({
+        url: '/api/live/Devicemanager/rebootDevice?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+        type: 'GET',
+        dataType: 'JSON',
+        beforeSend: function (request) {
+        },
+        success: function (data) {
+          $('.modal').removeClass('show');
+          if (data.header.retStatus !== 200) {
+            bootoast({
+              type: 'success',
+              message: data.header.retMessage,
+              position: 'top-center',
+              timeout: true,
+              animationDuration: 300
+            });
+          } else {
+            bootoast({
+              type: 'success',
+              message: 'success！',
+              position: 'top-center',
+              timeout: true,
+              animationDuration: 300
+            });
+          }
+        },
+        error: function (error) {
+          console.log('error');
+        }
+      });
+    });
+
+    // 删除设备
+    $('.delete_device').on('click', function () {
+      params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","device_userid":"' + userid + '"}');
+      $.ajax({
+        url: '/api/live/Devicemanager/removeDevice?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+        type: 'GET',
+        dataType: 'JSON',
+        beforeSend: function (request) {
+        },
+        success: function (data) {
+          $('.modal').removeClass('show');
+          if (data.header.retStatus !== 200) {
+            bootoast({
+              type: 'success',
+              message: data.header.retMessage,
+              position: 'top-center',
+              timeout: true,
+              animationDuration: 300
+            });
+          } else {
+            params2 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":1}');
+            getList();
+            bootoast({
+              type: 'success',
+              message: 'success！',
+              position: 'top-center',
+              timeout: true,
+              animationDuration: 300
+            });
+          }
+        },
+        error: function (error) {
+          console.log('error');
+        }
+      });
+    });
+
+    // 提取链克
+    $('.picks').on('click', function () {
+      params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","device_userid":"' + userid + '"}');
+      $.ajax({
+        url: '/api/live/Devicemanager/drawCoin?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+        type: 'GET',
+        dataType: 'JSON',
+        beforeSend: function (request) {
+        },
+        success: function (data) {
+          $('.modal').removeClass('show');
+          if (data.header.retStatus !== 200) {
+            if (data.header.retMessage === '只有工作日的10:00-18:00允许提取') {
+              alermessage = 'Only working day 10:00-18:00 allows extraction';
+            } else {
+              alermessage = data.header.retMessage;
+            }
+            bootoast({
+              type: 'success',
+              message: alermessage,
+              position: 'top-center',
+              timeout: true,
+              animationDuration: 300
+            });
+
+          } else {
+            bootoast({
+              type: 'success',
+              message: 'success！',
+              position: 'top-center',
+              timeout: true,
+              animationDuration: 300
+            });
+          }
+        },
+        error: function (error) {
+          console.log('error');
+        }
+      });
+    });
+
+    // 提取链克
+    $('.changeName').on('click', function () {
+      $('.select').addClass('none');
+      $('.inputName').removeClass('none');
+
+    });
+
+    // 提取链克
+    $('.changeGroup').on('click', function () {
+      $('.select').addClass('none');
+      $('.groupBox').removeClass('none');
+    });
+
+
+    // 确定
+    $('.sure').on('click', function () {
+      if ($('.inputr').val()) {
+        params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","device_userid":"' + userid + '","device_name":"' + $('.inputr').val() + '"}');
+        $.ajax({
+          url: '/api/live/Devicemanager/renameDevice?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+          type: 'GET',
+          dataType: 'JSON',
+          beforeSend: function (request) {
+          },
+          success: function (data) {
+            $('.modal').removeClass('show');
+            $('.inputName').addClass('none');
+            $('.select').removeClass('none');
+            if (data.header.retStatus !== 200) {
+              bootoast({
+                type: 'success',
+                message: data.header.retMessage,
+                position: 'top-center',
+                timeout: true,
+                animationDuration: 300
+              });
+            } else {
+              params2 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":1}');
+              getList();
+            }
+          },
+          error: function (error) {
+            console.log('error');
+            $('.modal').removeClass('show');
+            $('.inputName').addClass('none');
+            $('.select').removeClass('none');
+          }
+        });
+      } else {
+        $('.modal').removeClass('show');
+        $('.inputName').addClass('none');
+        $('.select').removeClass('none');
+      }
+    });
+
+    // 取消
+    $('.reset').on('click', function () {
+      $('.modal').removeClass('show');
+      $('.inputName').addClass('none');
+      $('.select').removeClass('none');
+    });
+
+    // 分组确定
+    $('.selectSure').on('click', function () {
+      newId = $("input[type='radio']:checked").val();
+      newname = $("input[type='radio']:checked").attr('data-groupname');
+      if (newId) {
+        params = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","device_userid":"' + userid + '","new_group_id":"' + newId + '","old_group_id":"' + groupid + '","new_group_name":"' + newname + '"}');
+        $.ajax({
+          url: '/api/live/Devicemanager/setDeviceGroup?header={"os{"os":"web","reqtime":"1538121291086","sign":"","v"}&body=' + params,
+          type: 'GET',
+          dataType: 'JSON',
+          beforeSend: function (request) {
+          },
+          success: function (data) {
+            $('.modal').removeClass('show');
+            $('.inputName').addClass('none');
+            $('.select').removeClass('none');
+            $('.groupBox').addClass('none');
+            if (data.header.retStatus !== 200) {
+              bootoast({
+                type: 'success',
+                message: data.header.retMessage,
+                position: 'top-center',
+                timeout: true,
+                animationDuration: 300
+              });
+            } else {
+              params2 = encodeURI('{"monitor_userid":"' + isLogin.userid + '","session_id":"' + isLogin.session_id + '","is_all":1}');
+              getList();
+            }
+          },
+          error: function (error) {
+            console.log('error');
+            $('.modal').removeClass('show');
+            $('.inputName').addClass('none');
+            $('.select').removeClass('none');
+            $('.groupBox').addClass('none');
+          }
+        });
+      } else {
+        $('.modal').removeClass('show');
+        $('.inputName').addClass('none');
+        $('.select').removeClass('none');
+        $('.groupBox').addClass('none');
+      }
+    });
+
+    // 取消
+    $('.selectReset').on('click', function () {
+      $('.modal').removeClass('show');
+      $('.inputName').addClass('none');
+      $('.select').removeClass('none');
+      $('.groupBox').addClass('none');
+    });
+
+    $('.modal').on('click', function () {
+      $('.modal').removeClass('show');
+      $('.inputName').addClass('none');
+      $('.select').removeClass('none');
+      $('.groupBox').addClass('none');
+    })
+
+    $('.modal-body').on('click', function (e) {
+      e.stopPropagation();
+    })
+
   })
 
 </script>

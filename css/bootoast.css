@@ -63,7 +63,7 @@
 
 .bootoast-container.center {
     left: 50%;
-    top: 20%;
+    top: 8%;
     -webkit-transform: translateX(-50%);
        -moz-transform: translateX(-50%);
         -ms-transform: translateX(-50%);

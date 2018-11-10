@@ -24,11 +24,11 @@ $('.click_im_area').on('click', function() {
   }
 });
 
-$('.header_wrap .header .list').on('click', function() {
+$('.header_wrap .header .list').on('click', function () {
   if (isLoginS) {
-    $(location).attr('href', 'list.html');  // 跳转到首页
+    $(location).attr('href', 'list.html');  // 
   } else {
-    $(location).attr('href', 'login.html');  // 跳转到首页
+    $(location).attr('href', 'login.html?from=list');  // 跳转到首页
   }
 });
 

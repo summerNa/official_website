@@ -20,16 +20,16 @@
       </a>
       <ul class="middle">
         <li>
-          <a href="home.html">首页</a>
+          <a href="home.html">Home</a>
         </li>
         <li>
-          <a href="product.html">产品</a>
+          <a href="product.html">Product</a>
         </li>
         <li>
-          <a href="introduce.html">关于我们</a>
+          <a href="introduce.html">About Us</a>
         </li>
         <li class="">
-          <a class="list" href="javascript:;">小宇监工</a>
+          <a class="list" href="javascript:;">Xiaoyu Supervisor</a>
         </li>
       </ul>
       <div class="right">
@@ -38,13 +38,13 @@
             <a class="en"><img src="../img/common/zh.png" alt=""></a>
           </li>
           <li class="loginY">
-            <a class="usernameAndLogin" href="login.html">登录</a>
+            <a class="usernameAndLogin" href="login.html">Login</a>
           </li>
           <li>
             <div class="line"></div>
           </li>
           <li class="loginY">
-            <a class="logoutAndRegister" href="register_phone.html">注册</a>
+            <a class="logoutAndRegister" href="register_phone.html">Register</a>
           </li>
         </ul>
       </div>
@@ -52,30 +52,27 @@
   </div>
   <div class="content_wrap">
     <div class="content">
-      <p class="title">产量趋势图</p>
-      <p class="sm-title">产量</p>
+      <p class="title">Yield Trend</p>
+      <p class="sm-title">Yield</p>
       <p class="mm-title">hui</p>
       <div id="main" style="width: 13.6rem;height:4rem;"></div>
       <div class="btnWrap">
-        <div class="active">7天</div>
-        <div>30天</div>
-        <div>全部</div>
+        <div class="active">week</div>
+        <div>30days</div>
+        <div>All</div>
       </div>
       <div class="btnWrap2">
-        <p class="actived">产量详情</p>
-        <p class="">提取详情</p>
+        <p class="actived">Yield Details</p>
+        <p class="">Withdrawa Is Details</p>
       </div>
       <div class="tableBox">
         <table>
           <thead>
-            <th>日期</th>
-            <th class="changetd">产量</th>
+            <th>Date</th>
+            <th class="changetd">Yield</th>
           </thead>
           <tbody class="con">
-            <tr>
-              <td>20181101</td>
-              <td>0.50</td>
-            </tr>
+            
           </tbody>
         </table>
       </div>
@@ -86,7 +83,7 @@
 
 </body>
 <script src="../js/jquery-1.9.1.min.js"></script>
-<script src="../js/common.js"></script>
+<script src="js/common.js"></script>
 <script src="../js/params.js"></script>
 <script src="../js/echarts.simple.min.js"></script>
 <script>
@@ -115,7 +112,7 @@
     var detailArr;
 
     $('.en').on('click', function() {
-      $(location).attr('href', '../en1/statistics.html?userid='+userid+'&username='+username);
+      $(location).attr('href', '../zh1/statistics.html?userid='+userid+'&username='+username);
     })
 
     // 基于准备好的dom，初始化echarts实例
@@ -226,7 +223,7 @@
             content += '<tr><td>' + detailArr[i].date + '</td><td>' + Number(detailArr[i].income).toFixed(2) + '</td></tr>'
           }
           $('.con').empty();
-          $('.changetd').text('产量')
+          $('.changetd').text('Yield')
           $('.con').append(content);
         }
       },
@@ -238,12 +235,12 @@
     $('.btnWrap div').on('click', function () {
       x = [];
       dataArr = [];
-      if ($(this).text() === '7天') {
+      if ($(this).text() === 'week') {
         for (var i = 0; i < dataAllObj.week_data.length; i++) {
           x.push(String(dataAllObj.week_data[i].date).slice(4));
           dataArr.push(Number(dataAllObj.week_data[i].totalOutput.toFixed(2)));
         }
-      } else if ($(this).text() === '30天') {
+      } else if ($(this).text() === '30days') {
         for (var i = 0; i < dataAllObj.month_data.length; i++) {
           x.push(String(dataAllObj.month_data[i].date));
           dataArr.push(Number(dataAllObj.month_data[i].totalOutput.toFixed(2)));
@@ -273,13 +270,13 @@
 
     $('.btnWrap2 p').on('click', function () {
       $(this).addClass('actived').siblings().removeClass('actived');
-      if ($(this).text() === '提取详情') {
+      if ($(this).text() === 'Withdrawa Is Details') {
         var content = ''
         for (var i = 0; i < pickArr.length; i++) {
           content += '<tr><td>' + pickArr[i].updateTime + '</td><td>' + pickArr[i].originBalance.toFixed(2) + '</td></tr>'
         }
         $('.con').empty();
-        $('.changetd').text('获得链克')
+        $('.changetd').text('Get LianKe')
         $('.con').append(content);
       } else {
         var content = ''
@@ -287,7 +284,7 @@
           content += '<tr><td>' + detailArr[i].date + '</td><td>' + Number(detailArr[i].income).toFixed(2) + '</td></tr>'
         }
         $('.con').empty();
-        $('.changetd').text('产量')
+        $('.changetd').text('Yield')
         $('.con').append(content);
       }
     });
